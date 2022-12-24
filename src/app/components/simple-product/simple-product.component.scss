@@ -1,0 +1,129 @@
+.product{
+    background-color: white;
+    box-shadow: 2px 2px 5px #333;
+    margin: 10px;
+    width: max-content;
+    position: relative;
+    width: 270px;
+}
+
+.product:hover{
+    cursor: pointer;
+    
+}
+
+.product-name{
+    color: rgb(63, 141, 167);
+    font-size: 1.6em;
+}
+.product-cost{
+    margin: 5px;
+    font-size: 1.2em;
+    text-align: right;
+    color: black;
+    text-decoration: line-through;
+}
+
+.product-icon{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: rgb(238, 255, 0);
+}
+
+.product-reduced_cost{
+    margin: 5px;
+    font-size: 1.2em;
+    text-align: right;
+    color: black;
+}
+
+
+.product-discount{
+    position: absolute;
+    top: 5px;
+    padding: 3px 5px;
+    background-color: rgb(212, 157, 61);
+    left: 5px;
+    border:none;
+    color: black;
+
+}
+.discount{
+    color: black;
+}
+
+.new_releases{
+    color: yellow;
+}
+.hide_source{
+    color: rgb(255, 0, 0);
+}
+// .not_interested{
+//     color: red;
+// }
+.product-vars{
+    padding: 10px;
+}
+
+.favorite,.favorite_border{
+    position: absolute;
+    top: 35px;
+    right: 5px;
+    color: yellow;
+}
+
+.favorite_border{
+    color: rgb(0, 0, 0);
+}
+.favorite:hover,.favorite_border:hover{
+    color: black;
+}
+
+
+.product-alt{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 10px auto;
+    box-shadow: 2px 2px 5px #333;
+
+}
+.product-vars-alt{
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.btn-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+
+.purchase{
+    color: white;
+    width: 50%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(194, 81, 0);
+    padding: 7px;
+
+}
+.purchase:hover{
+    cursor: pointer;
+}
+.purchase > div{
+    flex: 1;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.left{
+    text-align: left;
+}

@@ -1,0 +1,26 @@
+<div class="container" *ngIf="display==false">
+    <div class="rating" >
+        <div *ngFor="let item of rates" (mouseenter)="changeRating(item+1)" (click)="click()">
+            <span class="material-icons" >
+                {{item < rating?'star':'star_border'}}
+            </span>
+        </div>
+        <div class="rate" style="font-size: 18px;position: relative;top: -2px;">{{rating}}</div>
+        <div (click)="refresh()" class="refresh" *ngIf="clicked==true">
+            <span class="material-icons" style="color: rgb(0, 0, 0);font-size: 22px;">replay</span>
+        </div>
+    </div>  
+</div>
+
+
+<div class="container" *ngIf="display==true">
+    <div class="rating" >
+        <div *ngFor="let item of rates">
+            <span class="material-icons" >
+                {{item < rating?'star':'star_border'}}
+            </span>
+        </div>
+        <div class="rate" style="font-size: 18px;position: relative;top: -2px;">{{rating}}</div>
+
+    </div>  
+</div>

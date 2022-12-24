@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="filters">
+    <div class="categories">
+      <app-category></app-category>
+    </div>
+    <div class="price">
+      <b>Price</b>
+      <div class="prices">
+        <div class="priceInput">
+          <b>$</b>
+          <input [(ngModel)]="minprice" type="number" />
+        </div>
+        -
+        <div class="priceInput">
+          <b>$</b>
+          <input [(ngModel)]="maxprice" type="number" />
+        </div>
+      </div>
+    </div>
+    <div class="rating">
+      <b>Rate</b>
+      <div class="rate">
+        <app-rating [display]="false"></app-rating>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <!-- <div class="products">
+      <div *ngFor="let item of products">
+        <app-simple-product [product]="item"></app-simple-product>
+      </div>
+    </div> -->
+
+    <div class="product_catgery">
+      <div class="product_catgery_header">
+        <h2 class="category_name text-primary">Category_Name</h2>
+        <div class="Fiter_by">
+          <button mat-button [matMenuTriggerFor]="menu">Filter by: {{filterBy}} <mat-icon>arrow</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let item of f | keyvalue" (click)="setFilterBy(item.value)">{{item.value}}</button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="result_app">
+        <div class="results">80 results</div>
+        <div class="row">
+          <div class="touchable" (click)="setGridView(false)">
+            <span class="material-icons apperence" [ngStyle]="{color:GridView?'#333':'orange'}">view_list</span>
+          </div>
+          <div class="touchable" (click)="setGridView(true)">
+            <span class="material-icons apperence" [ngStyle]="{color:GridView?'orange':'#333'}">view_module</span>
+          </div>
+        </div>
+      </div>
+      <div class="products"  [ngStyle]="{flexDirection:GridView?'row':'none',alignItems:'center',display:GridView?'flex':'block'}">
+          <app-simple-product [product]="item" [defaultView]='GridView' *ngFor="let item of products"></app-simple-product>
+      </div>
+    </div>
+  </div>
+</div>

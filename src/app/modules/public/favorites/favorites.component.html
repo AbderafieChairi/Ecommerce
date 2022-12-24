@@ -1,0 +1,12 @@
+
+
+
+<div class="cart-products">
+    <div class="cart">Favorite ({{products.length}})</div>
+    <div class="hr"></div>
+    <div class="list">
+        <div *ngFor="let item of products">
+            <app-simple-product [product]="item"></app-simple-product>
+        </div>
+    </div>
+</div>

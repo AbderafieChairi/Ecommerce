@@ -1,0 +1,87 @@
+<!-- <div>{{price}}</div> -->
+
+
+
+<div class="cart-products">
+    <div class="products">
+        <table>
+            <tr>
+              <th></th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Remove</th>
+              <th>Price</th>
+            </tr>
+            <tr *ngIf="products.length==0">
+                <td [colSpan]="5" class="empty">
+                    Cart list empty
+                </td>
+            </tr>
+            <tr *ngFor="let item of products">
+                <td class="img">
+                    <img [src]='item.product.imgUrl' height="150" width="150"/>
+                </td>
+                <td >
+                    <div class="title">{{item.product.name}}</div>
+                </td>
+                <td >
+                    <div class="quantity">
+                        <div class="btn" (click)="reduceQuantity(item.product.id)">
+                            <span class="material-icons">remove</span>
+                        </div>
+                        <div class="q" >{{item.quantity}}</div>
+                        <div class="btn" (click)="addQuantity(item.product.id)">
+                            <span class="material-icons">add</span>
+                        </div>                      
+                    </div>
+
+                </td>
+                <td>
+                    <div class="remove" (click)="removeFromCart(item.product.id)">
+                        <span class="material-icons" style="font-size: 18px;">close</span>
+                    </div>
+                </td>
+                <td class="details">
+                    <div class="cost">{{item.product.cost}}£</div>
+                </td>
+            </tr>
+
+        </table>
+        <div class="prices">
+            <div class="item">
+                Discount 0.00£
+            </div>
+            <div class="item">
+                Delivery 0.00£
+            </div>            
+            <div class="item">
+                Subtotal {{price}}£
+            </div>
+            <div class="item">
+                Total {{price}}£
+            </div>
+        </div>
+        
+        <div class="commande">
+            <div class="discount">
+                <input placeholder="please enter a promo"/>
+                <div class="discount-btn button">
+                    Apply Discount
+                </div>
+            </div>
+            <div>
+                <div class="checkout button">
+                    <div class="check-title">Checkout</div>
+                    <div>
+                        <span class="material-icons" style="color: white;">shopping_bag</span>
+                    </div>
+                </div>
+                <div class="shopping button" (click)="toHome()">
+                    <div class="shopping-title">Continue Shopping</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

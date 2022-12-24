@@ -1,0 +1,34 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+.nav{
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-content{
+    width: 100%;
+    height: 90vh;
+  }
+  
+.example-sidenav {
+    min-width: 200px;
+    padding: 10px;
+}
+.touchable:hover{
+    cursor: pointer;
+    user-select: none;
+    opacity: 70%;
+}
+.icon{
+    margin: 7px;
+}
+
+.mat-list-item:hover{
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.7;
+}
+  

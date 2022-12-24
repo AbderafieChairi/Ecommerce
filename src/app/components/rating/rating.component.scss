@@ -1,0 +1,24 @@
+.container{
+    width: max-content;
+}
+.rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+span{
+    color: rgb(233, 172, 40);
+    font-size: 24px;
+}
+.rating >div :hover{
+    cursor: pointer;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 12px;
+}
+.refresh:hover{
+    cursor: pointer;
+}

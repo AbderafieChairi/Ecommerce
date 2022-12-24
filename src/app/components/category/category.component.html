@@ -1,0 +1,8 @@
+<table>
+    <tr>
+        <td>Categories</td>
+    </tr>
+    <tr *ngFor="let item of categories | keyvalue">
+        <td (click)="searchCatalog(item.value)">{{item.value}}</td>
+    </tr>
+</table>

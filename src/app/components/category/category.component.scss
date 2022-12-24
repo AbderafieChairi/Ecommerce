@@ -1,0 +1,17 @@
+table{
+    margin:10px;
+    box-shadow: 2px 2px 5px #333;
+    padding: 0px;
+}
+tr,td{
+    border-bottom: solid 2px black;
+}
+td{
+    padding: 10px;
+    font-size: 20px;
+}
+td:hover{
+    color: #aaa;
+    cursor: pointer;
+    user-select: none;
+}

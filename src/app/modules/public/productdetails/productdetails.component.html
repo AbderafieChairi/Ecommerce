@@ -1,0 +1,54 @@
+
+<div class="container product">
+    <div class="img">
+        <img [src]='product.imgUrl' height="270" width="270"/>
+    </div>
+    <div class="details">
+        <div class="product-icon">
+            <!-- {{product.state}} -->
+            <!-- <div *ngIf="product.state==productstate.onSale" class="discount"><span class="material-icons">discount</span></div> -->
+            <!-- <div *ngIf="product.state==productstate.new" class="new_releases"><span class="material-icons">new_releases</span></div> -->
+            <!-- <div *ngIf="product.state==productstate.outOfStock" class="hide_source"><span class="material-icons-outlined">hide_source</span></div> -->
+            <!-- <div *ngIf="product.state==productstate.discontinued" class="not_interested"><span class="material-icons">not_interested</span></div> -->
+        </div>
+        <!-- <div class="product-discount">-{{Math.round((1-product.cost/product.prev_cost)*100)}}%</div> -->
+        <div class="fav" (click)="AddToFavorite()" *ngIf="!_inFavorite"><span class="material-icons-outlined favorite_border">favorite_border</span></div>
+        <div class="fav" (click)="removeFromFavorite()" *ngIf="_inFavorite"><span class="material-icons-outlined favorite">favorite</span></div>
+        <div class="product-vars">
+            <div class="title">{{product.name}}</div>
+            <div class="category">category : {{productDetail.category}}</div>
+            <div class="rate">
+                <app-rating [rating]="productDetail.rate"></app-rating>
+            </div>
+            <div class="product-prev-cost">{{product.prev_cost}}£</div>
+            <div class="product-cost">{{product.cost}}£</div>  
+
+        </div>
+        <div class="btn" >
+            <div class="purchase" (click)="addToCart()" *ngIf="!_inCart">
+                <span class="material-icons" style="color: white;">
+                    add_shopping_cart
+                    </span>
+                <div>Add to Cart</div>
+            </div>
+            <div class="quantity" *ngIf="_inCart">
+                <div class="btn1" (click)="reduceQuantity()">
+                    <span class="material-icons">remove</span>
+                </div>
+                <div class="q" >{{quantity}}</div>
+                <div class="btn1" (click)="addQuantity()">
+                    <span class="material-icons">add</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+    
+</div>
+<div class="container">
+    <div class="title">Details</div>
+    <p>{{productDetail.detail}}</p>
+</div>
+<!-- productDetail -->
+    

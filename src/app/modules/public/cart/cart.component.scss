@@ -1,0 +1,176 @@
+*{
+    color: black;
+}
+.cart-products{
+    background-color: rgb(199, 199, 199);
+    min-height: 90vh;
+    width: 100%;
+}
+.cart{
+    margin: 10px;
+    font-size: 18px;
+    color: black;
+}
+.hr{
+    height: 2px;
+    background-color: rgb(71, 71, 71);
+}
+.products{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.quantity{
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    align-items: center;
+}
+
+.btn,.remove{
+    background-color: #ffffff;
+    border: solid 1px black;
+    height: 30px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    border-radius: 3px;
+}
+.btn{
+    background-color: orange;
+    border: none;
+}
+.remove:hover{
+    background-color: #dddddd;
+    cursor: pointer;
+    user-select: none;
+}
+.btn:hover{
+    cursor: pointer;
+    background-color: rgb(116, 76, 0);
+    user-select: none;
+}
+.q{
+    font-size: 22px;
+}
+td, th {
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+table {
+    border-collapse: collapse;
+    width: 80%;
+    background-color: white;
+    margin: 20px auto;
+}
+.cost{
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.img{
+    width: 170px;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.prices{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    width: 70%;
+    padding: 10px 50px;
+}
+.prices > .item{
+    flex: 1;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    border: solid 1px rgb(170, 170, 170);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+
+.commande{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    align-items: flex-start;
+}
+.discount{
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;   
+}
+.discount > input{
+    flex: 1;
+    height: 40px;
+    padding: 7px;
+    font-size: 20px;
+}
+
+.checkout{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(22, 22, 50);
+    color: white;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
+.shopping,.discount-btn{
+    background-color: rgb(22, 22, 50);
+    color: white;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px; 
+}
+.shopping{
+    background-color: white;
+    border: solid 1px  rgb(22, 22, 50);;
+}
+
+.shopping-title,.check-title{
+    color: white;
+    flex:1;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+.shopping-title{
+    color: black;
+}
+
+
+.button:hover{
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.7;
+}
+
+.empty{
+    text-align: center;
+    font-size: 18px;
+}

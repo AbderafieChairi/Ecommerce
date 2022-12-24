@@ -1,0 +1,18 @@
+<div class="container1">
+    <div>
+        <!-- <div class="info">
+            <div>
+                <div><span class="material-icons discount">discount </span> <p>onSale</p></div>
+                <div><span class="material-icons new_releases">new_releases </span> <p>new</p></div>
+                <div><span class="material-icons-outlined hide_source"> hide_source</span> <p>out Of Stock</p></div>
+            </div>
+        </div> -->
+        <div class="products">
+            <div *ngFor="let item of products" >
+                <app-simple-product [product]="item" [defaultView]="true"></app-simple-product>
+            </div>    
+        </div>
+    </div>
+</div>
+
+
