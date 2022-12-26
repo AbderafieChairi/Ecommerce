@@ -6,10 +6,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-padding,
-      "2": $base-padding * 2,
-      "3": $base-padding * 4,
-      "4": $base-padding * 6,
-      "5": $base-padding * 8
+      "2": $base-padding * 1.5,
+      "3": $base-padding * 2.25,
+      "4": $base-padding * 3,
+      "5": $base-padding * 4
     ),
   ),
   "padding-left": (
@@ -17,10 +17,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-padding,
-      "2": $base-padding * 2,
-      "3": $base-padding * 4,
-      "4": $base-padding * 6,
-      "5": $base-padding * 8
+      "2": $base-padding * 1.5,
+      "3": $base-padding * 2.25,
+      "4": $base-padding * 3,
+      "5": $base-padding * 4
     ),
   ),
   "padding-right": (
@@ -28,10 +28,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-padding,
-      "2": $base-padding * 2,
-      "3": $base-padding * 4,
-      "4": $base-padding * 6,
-      "5": $base-padding * 8
+      "2": $base-padding * 1.5,
+      "3": $base-padding * 2.25,
+      "4": $base-padding * 3,
+      "5": $base-padding * 4
     ),
   ),
   "padding-top": (
@@ -39,10 +39,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-padding,
-      "2": $base-padding * 2,
-      "3": $base-padding * 4,
-      "4": $base-padding * 6,
-      "5": $base-padding * 8
+      "2": $base-padding * 1.5,
+      "3": $base-padding * 2.25,
+      "4": $base-padding * 3,
+      "5": $base-padding * 4
     ),
   ),
   "padding-bottom": (
@@ -50,10 +50,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-padding,
-      "2": $base-padding * 2,
-      "3": $base-padding * 4,
-      "4": $base-padding * 6,
-      "5": $base-padding * 8
+      "2": $base-padding * 1.5,
+      "3": $base-padding * 2.25,
+      "4": $base-padding * 3,
+      "5": $base-padding * 4
     ),
   ),
   "margin": (
@@ -61,10 +61,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-margin,
-      "2": $base-margin * 2,
-      "3": $base-margin * 4,
-      "4": $base-margin * 6,
-      "5": $base-margin * 8
+      "2": $base-margin * 1.5,
+      "3": $base-margin * 2.25,
+      "4": $base-margin * 3,
+      "5": $base-margin * 4
     ),
   ),
   "margin-left": (
@@ -72,10 +72,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-margin,
-      "2": $base-margin * 2,
-      "3": $base-margin * 4,
-      "4": $base-margin * 6,
-      "5": $base-margin * 8
+      "2": $base-margin * 1.5,
+      "3": $base-margin * 2.25,
+      "4": $base-margin * 3,
+      "5": $base-margin * 4
     ),
   ),
   "margin-right": (
@@ -83,10 +83,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-margin,
-      "2": $base-margin * 2,
-      "3": $base-margin * 4,
-      "4": $base-margin * 6,
-      "5": $base-margin * 8
+      "2": $base-margin * 1.5,
+      "3": $base-margin * 2.25,
+      "4": $base-margin * 3,
+      "5": $base-margin * 4
     ),
   ),
   "margin-top": (
@@ -94,10 +94,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-margin,
-      "2": $base-margin * 2,
-      "3": $base-margin * 4,
-      "4": $base-margin * 6,
-      "5": $base-margin * 8
+      "2": $base-margin * 1.5,
+      "3": $base-margin * 2.25,
+      "4": $base-margin * 3,
+      "5": $base-margin * 4
     ),
   ),
   "margin-bottom": (
@@ -105,10 +105,10 @@ $utilities: (
     "values": (
       "0": 0,
       "1": $base-margin,
-      "2": $base-margin * 2,
-      "3": $base-margin * 4,
-      "4": $base-margin * 6,
-      "5": $base-margin * 8
+      "2": $base-margin * 1.5,
+      "3": $base-margin * 2.25,
+      "4": $base-margin * 3,
+      "5": $base-margin * 4
     ),
   ),
 
@@ -134,7 +134,7 @@ $utilities: (
       "none": 0,
       "xs": math.div($base-border-radius, 4),
       "sm": math.div($base-border-radius, 2),
-      "lg": $base-border-radius * 2,
+      "lg": $base-border-radius * 1.5,
       "full": 50%,
     )
   ),
@@ -152,7 +152,7 @@ $utilities: (
     "prefix": "font",
     "values": (
       "sm": $font-size-sm,
-      "md": $base-font-size,
+      "md": $base-font-size*1.2,
       "lg": $font-size-lg,
       "xl": $font-size-xl,
       "xxl": $font-size-xxl
@@ -177,8 +177,4 @@ $utilities: (
     }
   }
 }
-.center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+

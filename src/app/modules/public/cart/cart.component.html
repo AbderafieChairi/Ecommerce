@@ -2,7 +2,7 @@
 
 
 
-<div class="cart-products">
+<div class="full-width">
     <div class="products">
         <table>
             <tr>
@@ -25,20 +25,22 @@
                     <div class="title">{{item.product.name}}</div>
                 </td>
                 <td >
-                    <div class="quantity">
-                        <div class="btn" (click)="reduceQuantity(item.product.id)">
+                    <div class="row jst-start gap-2 al-center">
+                        <div class="btn-secondary font-md p-1" (click)="reduceQuantity(item.product.id)">
                             <span class="material-icons">remove</span>
                         </div>
-                        <div class="q" >{{item.quantity}}</div>
-                        <div class="btn" (click)="addQuantity(item.product.id)">
+                        <div class="font-md" >{{item.quantity}}</div>
+                        <div class="btn-secondary font-md p-1" (click)="addQuantity(item.product.id)">
                             <span class="material-icons">add</span>
                         </div>                      
                     </div>
 
                 </td>
-                <td>
-                    <div class="remove" (click)="removeFromCart(item.product.id)">
-                        <span class="material-icons" style="font-size: 18px;">close</span>
+                <td >
+                    <div class="center column al-left">
+                        <div class="btn-gray font-md p-1" (click)="removeFromCart(item.product.id)">
+                            <span class="material-icons">close</span>
+                        </div>
                     </div>
                 </td>
                 <td class="details">
@@ -47,17 +49,17 @@
             </tr>
 
         </table>
-        <div class="prices">
-            <div class="item">
+        <div class="row gap-3">
+            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
                 Discount 0.00£
             </div>
-            <div class="item">
+            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
                 Delivery 0.00£
             </div>            
-            <div class="item">
+            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
                 Subtotal {{price}}£
             </div>
-            <div class="item">
+            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
                 Total {{price}}£
             </div>
         </div>

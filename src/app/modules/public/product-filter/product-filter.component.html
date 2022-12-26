@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="filters">
+<div class="full-width row al-left">
+  <!-- <div class="filters">
     <div class="categories">
       <app-category></app-category>
     </div>
@@ -23,26 +23,24 @@
         <app-rating [display]="false"></app-rating>
       </div>
     </div>
-  </div>
-  <div class="main">
-    <!-- <div class="products">
-      <div *ngFor="let item of products">
-        <app-simple-product [product]="item"></app-simple-product>
-      </div>
-    </div> -->
-
+  </div> -->
+  <div class="flex ">
     <div class="product_catgery">
-      <div class="product_catgery_header">
-        <h2 class="category_name text-primary">Category_Name</h2>
+      <div  class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
+        <div class="font-lg text-primary">Category_Name</div>
         <div class="Fiter_by">
-          <button mat-button [matMenuTriggerFor]="menu">Filter by: {{filterBy}} <mat-icon>arrow</mat-icon></button>
+          <button mat-button [matMenuTriggerFor]="menu">Filter by: {{filterBy}} 
+            <span class="material-icons p-2 font-lg">expand_more</span>
+          </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let item of f | keyvalue" (click)="setFilterBy(item.value)">{{item.value}}</button>
+            <button mat-menu-item *ngFor="let item of f | keyvalue" (click)="setFilterBy(item.value)"
+              class="p-2 font-md"
+            >{{item.value}}</button>
           </mat-menu>
         </div>
       </div>
-      <div class="result_app">
-        <div class="results">80 results</div>
+      <div class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
+        <div class="font-md">80 results</div>
         <div class="row">
           <div class="touchable" (click)="setGridView(false)">
             <span class="material-icons apperence" [ngStyle]="{color:GridView?'#333':'orange'}">view_list</span>
@@ -54,6 +52,16 @@
       </div>
       <div class="products"  [ngStyle]="{flexDirection:GridView?'row':'none',alignItems:'center',display:GridView?'flex':'block'}">
           <app-simple-product [product]="item" [defaultView]='GridView' *ngFor="let item of products"></app-simple-product>
+      </div>
+      <div class="pd-1 row jst-center">
+        <div class="br-primary row gap-2 br-xs hidden m-2">
+          <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">previous</div>
+          <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">1</div>
+          <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">2</div>
+          <div class="txt text-white touchable bg-primary font-md p-3">3</div>
+          <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">...</div>
+          <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">next</div>
+        </div>
       </div>
     </div>
   </div>

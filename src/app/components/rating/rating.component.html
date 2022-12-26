@@ -1,4 +1,4 @@
-<div class="container" *ngIf="display==false">
+<div class="rate-container" *ngIf="display==false">
     <div class="rating" >
         <div *ngFor="let item of rates" (mouseenter)="changeRating(item+1)" (click)="click()">
             <span class="material-icons" >

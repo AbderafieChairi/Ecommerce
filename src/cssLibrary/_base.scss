@@ -32,3 +32,23 @@ img {
 .test {
   color: $primary;
 }
+
+
+.l-thr{
+  text-decoration: line-through;
+}
+.txt{
+  vertical-align: middle;
+  text-align: center;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.hidden{
+  overflow: hidden;
+}
+.touchable:hover{
+  cursor: pointer;
+}

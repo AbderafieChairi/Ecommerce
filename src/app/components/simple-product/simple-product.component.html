@@ -56,11 +56,12 @@
       <span class="material-icons-outlined favorite">favorite</span>
     </div>
   </div>
-  <div class="product-vars-alt">
-    <div class="product-name">{{ product.name }}</div>
-    <div class="product-cos left" >{{ product.prev_cost }}£</div>
-    <div class="product-reduced_cost left">{{ product.cost }}£</div>
-    <div class="btn-container">
+  <div class="flex column al-left p-2">
+    <div class="font-lg">{{ product.name }}</div>
+    <div class="font-md text-secondary m-1 ml-2">category : Beauty and personal care</div>
+    <div class="font-md mt-2 text-gray l-thr" >{{ product.prev_cost }}£</div>
+    <div class="font-md mt-2 text-primary">{{ product.cost }}£</div>
+    <div class="flex column al-right jst-end">
       <div class="btn-outlined-primary row gap-1" 
       >
         <span class="material-icons">

@@ -1,6 +1,7 @@
 @each $key, $val in $colors {
   .text-#{$key} {
     color: $val;
+    font-family: Arial, Helvetica, sans-serif;
   }
   .text-hover-#{$key} {
     &:hover {
@@ -9,6 +10,15 @@
   }
   .bg-#{$key} {
     background-color: $val;
+  }
+  .bg-#{$key}-hover {
+    &:hover{
+      background-color: $val;
+    }
+  }
+  .br-#{$key} {
+    border:solid 1px $val;
+
   }
   @if ($val != black and $val != white) {
     // light variations

@@ -6,6 +6,7 @@
   padding: $base-padding $base-padding * 2;
   border-radius: $base-border-radius;
   background-color: $bg-color;
+  align-items: center
 }
 
 .btn {
@@ -15,12 +16,13 @@
 @each $key, $val in $colors {
   .btn-#{$key} {
     @include btn($val);
+    color: white;
     &:hover {
-      background-color: lighten($val, 5);
+      background-color: lighten($val, 6);
     }
   }
   .btn-outlined-#{$key} {
-    @include btn(#fff);
+    @include btn(transparent);
     border: $base-border-thickness solid $val;
     *{
       color: $val;
