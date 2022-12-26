@@ -1,0 +1,42 @@
+<p>new-product works!</p>
+<div class="form-card">
+    <h2>NEW PRODUCT</h2>
+    <form [formGroup]="productform">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" type="text" formControlName="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" type="text" formControlName="description" rows="4">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="imgUrl">URL de l'image</label>
+            <input id="imgUrl" type="text" formControlName="imgUrl">
+        </div>
+        <div class="form-group">
+            <label for="cost">Cost</label>
+            <input id="cost" type="text" formControlName="cost">
+        </div>
+        <div class="action-buttons">
+            <button type="submit" (click)="onSubmitForm()" [disabled]="productform.invalid">Save product</button>
+        </div>
+
+    </form>
+</div>
+<div class="product-card" *ngIf="productPreview$ | async as product">
+
+    <!-- <a routerLink="..">Back</a>-->
+    
+        <p>{{ 34567.47 | number}}</p>
+        <p>{{ 0.336 | percent }}</p>
+        <p>{{ 344.36 | currency: 'EUR' }}</p>
+        <h2>{{ product.name | titlecase }}</h2>
+        <img [src]="product.imgUrl" [alt]="product.name"> 
+        
+        
+        <!-- <app-simple-product [product]="product" [defaultView]="true"></app-simple-product>  -->
+    
+
+</div>

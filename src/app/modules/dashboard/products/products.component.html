@@ -1,1 +1,38 @@
-<p>products works!</p>
+<link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<div class="gridcon">
+  <div class="tablediv">
+  <table class="table caption-top">
+      <caption>Products List </caption>
+      <thead>
+        <tr>
+          <th scope="col">#Id</th>
+          <th scope="col">name</th>
+          <th scope="col">prev_cost</th>
+          <th scope="col">imgUrl</th>
+          <th scope="col">state</th>
+          <th scope="col">cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productsList | async">
+          <td>{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.prev_cost}}</td>
+          <td>{{product.imgUrl}}</td>
+          <td>{{product.state}}</td>
+          <td>{{product.cost}}</td>
+          <td><button (click)="onClick(product)">Modifier</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="table-rigth">
+      <a class="padd" routerLink="../create">add product</a>
+    <br/>
+      <a class="disc">apply universal discount</a>
+
+    </div>
+  <div class="child">
+  <router-outlet></router-outlet>
+</div>
+</div>

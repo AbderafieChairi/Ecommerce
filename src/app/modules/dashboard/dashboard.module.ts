@@ -11,25 +11,31 @@ import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import { DashBoardRoutingModule } from './dashboard-routing.module';
 import {MatRippleModule} from '@angular/material/core';
+import { ProductUpdateComponent } from './product-update/product-update.component';
+import { NewProductComponent } from './new-product/new-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PublicModule } from "../public/public.module";
 
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    ProductsComponent,
-    OrdersComponent,
-    HomeComponent,
-    
-  ],
-  imports: [
-    CommonModule,
-    DashBoardRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatMenuModule,
-    MatRippleModule
-  ]
+    declarations: [
+        DashboardComponent,
+        ProductsComponent,
+        OrdersComponent,
+        HomeComponent,
+        ProductUpdateComponent,
+        NewProductComponent,
+    ],
+    imports: [
+        CommonModule,
+        DashBoardRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatMenuModule,
+        MatRippleModule,
+        ReactiveFormsModule,
+    ]
 })
 export class DashboardModule { }
