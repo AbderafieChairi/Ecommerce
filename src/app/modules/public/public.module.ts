@@ -31,7 +31,7 @@ import { CategoryComponent } from 'src/app/components/category/category.componen
     ProductFilterComponent,
     RatingComponent,
     FavoritesComponent,
-    CategoryComponent
+    CategoryComponent,
   ],
   imports: [
     CommonModule,

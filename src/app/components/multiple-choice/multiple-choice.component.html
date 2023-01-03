@@ -1,0 +1,18 @@
+<mat-form-field class="demo-chip-list">
+	<mat-chip-list #chipList>
+		<mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+			(removed)="remove(fruit)">
+			{{fruit}}
+			<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+		</mat-chip>
+		<input placeholder="New {{name}}..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)" />
+  </mat-chip-list>
+  		<ng-container *ngIf="max < 98">
+			<mat-error *ngIf="chipList.errorState">Too many {{name}}s</mat-error>
+			<mat-hint>Can only contain {{max}} {{name}}s max</mat-hint>
+		</ng-container>
+</mat-form-field>

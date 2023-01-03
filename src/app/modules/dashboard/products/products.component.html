@@ -1,1 +1,22 @@
-<p>products works!</p>
+<app-table
+  [listData]="productList"
+  (list)="setTableData($event)"
+  [displayedColumns]="displayedColumns"
+>
+  <tr *ngFor="let row of tableData" class="font-md p-5 full-width">
+    <td><input type="checkbox" [(ngModel)]="row.sel" /></td>
+    <!-- <td *ngFor="let head of displayedColumns">{{row[head.col]}}</td> -->
+    <td>
+      <div class="row">
+        <img [src]="row.thumbnail" height="60" width="60" />
+        <div class="flex column al-left">
+          <div class="font-md text-black p-1">{{ row.name }}</div>
+          <div class="font-md text-gray p-1">ID :{{ row.id }}</div>
+        </div>
+      </div>
+    </td>
+    <td ><div class="font-md text-black p-1">{{ row.category }}</div></td>
+    <td ><div class="font-md text-black p-1">{{ row.stock }}</div></td>
+    <td ><div class="font-md text-black p-1">${{ row.price }}</div></td>
+  </tr>
+</app-table>

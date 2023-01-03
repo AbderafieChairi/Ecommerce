@@ -1,0 +1,6 @@
+<app-table [listData]="data" (list)="setTableData($event)" [displayedColumns]="displayedColumns">
+  <tr *ngFor="let row of tableData" class="font-md p-5 full-width">
+    <td><input type="checkbox" [(ngModel)]="row.sel" /></td>
+    <td *ngFor="let head of displayedColumns">{{ row[head.col] }}</td>
+  </tr>
+</app-table>

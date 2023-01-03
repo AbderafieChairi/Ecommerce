@@ -19,18 +19,18 @@
             </tr>
             <tr *ngFor="let item of products">
                 <td class="img">
-                    <img [src]='item.product.imgUrl' height="150" width="150"/>
+                    <img [src]='item.product.thumbnail' height="150" width="150"/>
                 </td>
                 <td >
                     <div class="title">{{item.product.name}}</div>
                 </td>
                 <td >
                     <div class="row jst-start gap-2 al-center">
-                        <div class="btn-secondary font-md p-1" (click)="reduceQuantity(item.product.id)">
+                        <div class="btn-secondary font-md p-1" (click)="reduceQuantity(item.id)">
                             <span class="material-icons">remove</span>
                         </div>
                         <div class="font-md" >{{item.quantity}}</div>
-                        <div class="btn-secondary font-md p-1" (click)="addQuantity(item.product.id)">
+                        <div class="btn-secondary font-md p-1" (click)="addQuantity(item.id)">
                             <span class="material-icons">add</span>
                         </div>                      
                     </div>
@@ -38,28 +38,28 @@
                 </td>
                 <td >
                     <div class="center column al-left">
-                        <div class="btn-gray font-md p-1" (click)="removeFromCart(item.product.id)">
+                        <div class="btn-gray font-md p-1" (click)="removeFromCart(item.id)">
                             <span class="material-icons">close</span>
                         </div>
                     </div>
                 </td>
                 <td class="details">
-                    <div class="cost">{{item.product.cost}}£</div>
+                    <div class="cost">{{item.product.price}}£</div>
                 </td>
             </tr>
 
         </table>
-        <div class="row gap-3">
-            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
+        <div class="row full-width">
+            <div class="bg-white br-black font-md p-2 flex m-3">
                 Discount 0.00£
             </div>
-            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
+            <div class="bg-white br-black font-md p-2 flex m-3">
                 Delivery 0.00£
             </div>            
-            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
+            <div class="bg-white br-black font-md p-2 flex m-3">
                 Subtotal {{price}}£
             </div>
-            <div class="bg-white br-black col-12-xs col-6-sm col-3-xl font-md p-2 ">
+            <div class="bg-white br-black font-md p-2 flex m-3">
                 Total {{price}}£
             </div>
         </div>

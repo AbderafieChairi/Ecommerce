@@ -60,6 +60,9 @@ $layout-values: (
     margin-left: -$val;
     margin-right: -$val;
   }
+  .g-#{$key} {
+    gap:$val;
+  }
 }
 
 // justify content classes

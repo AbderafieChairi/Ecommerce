@@ -1,0 +1,44 @@
+
+
+
+[dir=ltr] .form-control--search{
+    background-position: left 0.625rem center;
+    padding-left: 2.25rem;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: rgba(69, 69, 69, 1);
+    outline: 0;
+    box-shadow: 0 0 0 3px rgb(19 38 77 / 13%);
+}
+
+.form-control {
+    padding-left: 50px;
+    font-size: 24px;
+    --sa-input-padding-x: 0.2125rem;
+    --sa-input-padding-y: 0.475rem;
+    font-size: .9375rem;
+    line-height: 1.375rem;
+    min-height: calc(1.5rem + var(--sa-input-padding-y)*2);
+
+}
+
+.form-control--search{
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(33, 37, 41, 0.3)'%3E%3Cpath d='M16.243 14.828s-.196.48-.542.826c-.361.361-.873.588-.873.588l-4.507-4.506A6.445 6.445 0 0 1 6.5 13 6.5 6.5 0 1 1 13 6.5a6.445 6.445 0 0 1-1.264 3.821l4.507 4.507zM6.5 2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 1.5rem 1.5rem;
+    margin: auto;
+    position: relative;
+    background-position: 10px 50%;
+}
+
+
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }

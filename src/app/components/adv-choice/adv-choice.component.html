@@ -1,0 +1,20 @@
+<form class="example-form">
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>items</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error >
+        <span *ngIf="myControl.errors?.['invalid']" style="font-size: 16px;">Choice a valid item</span>
+        <span *ngIf="myControl.errors?.['required']" style="font-size: 16px;">this is a required field</span>
+      </mat-error>
+    </mat-form-field>
+  </form>

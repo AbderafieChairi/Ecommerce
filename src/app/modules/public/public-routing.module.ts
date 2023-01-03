@@ -14,6 +14,7 @@ const routes: Routes = [
         {path:'filter',component:ProductFilterComponent},
         {path:'favorite',component:FavoritesComponent},
         {path:'product/:id',component:ProductdetailsComponent},
+        
     ]}
     
   ]

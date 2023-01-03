@@ -1,7 +1,7 @@
 
-<div class="row card m-3 display-f al-center" style="position: relative;">
+<div class="row card m-3 display-f al-center" style="position: relative;" *ngIf="this.loading.value==false">
     <div class="img">
-        <img [src]='product.imgUrl' height="270" width="270"/>
+        <img [src]='product.thumbnail' height="270" width="270"/>
     </div>
     <div class="column al-left flex">
         <div class="product-icon">
@@ -10,13 +10,14 @@
         <div class="fav" (click)="removeFromFavorite()" *ngIf="_inFavorite"><span class="material-icons-outlined favorite">favorite</span></div>
         <div class="product-vars">
             <div class="font-lg text-primary m-1 ml-2">{{product.name}}</div>
-            <div class="font-md text-secondary m-1 ml-2">category : {{productDetail.category}}</div>
+            <div class="font-md text-secondary m-1 ml-2">category : {{product.category.name}}</div>
+            <div class="font-md text-secondary m-1 ml-2">last Modification : {{product.modifiedAt}}</div>
             <div class="mt-2 mb-2">
-                <app-rating [rating]="productDetail.rate"></app-rating>
+                <app-rating [rating]="product.rating"></app-rating>
             </div>
-            <div class="font-md l-thr text-gray m-1 ml-2">{{product.prev_cost}}£</div>
-            <div class="font-md text-primary m-1 ml-2">{{product.cost}}£</div>  
-
+            <div class="font-md l-thr text-gray m-1 ml-2">{{product.price}}£</div>
+            <div class="font-md text-primary m-1 ml-2">{{product.price}}£</div>  
+                
         </div>
         <div class="flex column jst-end al-center" style="height: 100%;">
             <div class="btn-primary row gap-1" style="width: 80%;" (click)="addToCart()" *ngIf="!_inCart">
@@ -25,14 +26,8 @@
                     </span>
                 <div class="flex txt font-md">Add to Cart</div>
             </div>
-            <div class="row gap-2" *ngIf="_inCart">
-                <div class="btn-secondary font-md p-1" (click)="reduceQuantity()">
-                    <span class="material-icons">remove</span>
-                </div>
-                <div class="font-md" >{{quantity}}</div>
-                <div class="btn-secondary font-md p-1" (click)="addQuantity()">
-                    <span class="material-icons">add</span>
-                </div>
+            <div *ngIf="_inCart">
+                <div class="txt font-md text-primary p-1">Product in Cart</div>
             </div>
         </div>
     </div>
@@ -42,7 +37,8 @@
 </div>
 <div class="card m-3">
     <div class="font-lg text-primary m-3">Details</div>
-    <p class="font-md m-2">{{productDetail.detail}}</p>
+    <p class="font-md m-2">{{product.shortdetails}}</p>
+    <p class="font-md m-2">{{product.details}}</p>
 </div>
 <!-- productDetail -->
     

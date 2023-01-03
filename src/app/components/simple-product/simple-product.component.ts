@@ -17,7 +17,6 @@ export class SimpleProductComponent implements OnInit {
   // productDiscount = this.product?Math.round(this.product.reduced_cost/this.product.cost):null;
   Math = Math;
   constructor(
-      private cartService:CartService,
       private favoriteService:FavoriteService,
       private router:Router
     ) { }

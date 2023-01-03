@@ -1,56 +1,86 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Cart } from 'src/app/models/Cart';
 import { Product, ProductCart } from 'src/app/models/Product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  products = new BehaviorSubject<ProductCart []>([])
   price = new BehaviorSubject<number>(0)
+  cart =new BehaviorSubject<Cart>({} as Cart)
   constructor() {
-    this.products.subscribe(
+    this.cart.subscribe(
       args=>{
-        this.price.next(args.reduce(
-          (i,j)=>i+j.product.cost*j.quantity,0
+        this.price.next(args.cartItems.reduce(
+          (i,j)=>i+j.product.price*j.quantity,0
         ))
       }
     )
   }
-  public getProduct(){
-    return this.products;
-  }
-  addToCart(product :Product){
-    if(this.products.value.map(i=>i.product.id).includes(product.id)) return ;
-    this.products.next([...this.products.value,{product,quantity:1}]);
-  }
-  retrieveFromCart(id : string){
-    this.products.next(
-      this.products.value.filter(i=>{
-        i.product.id!=id
+
+  async init(){
+    console.log("init ....")
+    const cart_id = localStorage.getItem("cart_id")
+    if (cart_id==null){
+      console.log("create Cart")
+      fetch('http://10.72.128.43:8080/cart',{
+        method:'POST',
+        body:JSON.stringify({alue:'hhhh'}),
+        headers:{
+          "Content-Type":"application/json; charset=utf8"
+        }
       })
-    )
-  }
-  changeQuantity(id :string,q:number){
-    const out =this.products.value;
-    for (let p of out){
-      if(p.product.id==id){
-        p.quantity+=q;
-      }
-      
+      .then(res=>res.json())
+      .then((json:Cart)=>{localStorage.setItem("cart_id",json.id.toString());this.cart.next(json)})
+    }else{
+      console.log("get Cart")
+      fetch('http://10.72.128.43:8080/cart/'+cart_id)
+      .then(res=>res.json())
+      .then((json:Cart)=>this.cart.next(json))
     }
-    this.products.next(out.filter(i=>i.quantity>0));
   }
 
-  removeFromCart(id:string){
-    this.products.next(this.products.value.filter(i=>i.product.id!=id));
+  post(endpoint:String,data:any){
+    return fetch('http://10.72.128.43:8080/'+endpoint,{
+      method:'POST',
+      body:JSON.stringify(data),
+      headers:{
+        "Content-Type":"application/json; charset=utf8"
+      }
+    });
   }
-
+  async get(endpoint:String){
+    return fetch('http://10.72.128.43:8080/'+endpoint)
+  }
+  delete(endpoint:String){
+    console.log('http://10.72.128.43:8080/'+endpoint)
+    return fetch('http://10.72.128.43:8080/'+endpoint)
+  }
+  public getProduct(){
+    return this.cart;
+  }
+  public addToCart(product :Product){
+    console.log("add to cart function")
+    this.post('cartitem/'+this.cart.value.id,{quantity:1,product})
+    .then(res=>this.init())
+  }
+  removeFromCart(id : number){
+    this.get("cart/"+this.cart.value.id+"/"+id)
+    .then(res=>this.init())
+    
+  }
   isInCart(id:string):boolean{
-    return this.products.value.map(i=>i.product.id).includes(id);
+    return this.cart.value.cartItems.map(ci=>ci.product.id).includes(id)
   }
 
-  addQuantity=(id:string)=>{this.changeQuantity(id,1)}
-  reduceQuantity=(id:string)=>{this.changeQuantity(id,-1)}
+  addQuantity=(id:number)=>{
+    this.get("cartitem/add/"+id)
+    .then(res=>this.init())
+  }
+  reduceQuantity=(id:number)=>{
+    this.get("cartitem/retieve/"+id)
+    .then(res=>this.init()) 
+  }
 }
 

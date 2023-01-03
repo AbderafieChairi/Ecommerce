@@ -1,0 +1,31 @@
+<form 
+  [formGroup]="detailForm"
+(ngSubmit)="onSubmit()"  class="myform p-3">
+    <div>
+      <label  class="text-black font-md m-1" for="name">Nom</label>
+      <input class="f-ctl" type="text" id="name" formControlName="name">
+    </div>
+    <div>
+      <label  class="text-black font-md m-1" for="age">Birthday</label>
+      <input class="f-ctl" type="date" id="age" formControlName="birthday">
+    </div>
+    <div>
+      <label  class="text-black font-md m-1" for="sexe">Sexe</label>
+      <select id="sexe" formControlName="sexe">
+        <option value="homme">Homme</option>
+        <option value="femme">Femme</option>
+        <option value="autre">Autre</option>
+      </select>
+    </div>
+    <div>
+      <label  class="text-black font-md m-1" for="region">Adresse</label>
+      <input class="f-ctl" type="text" id="region" formControlName="address">
+    </div>
+    <div>
+      <label  class="text-black font-md m-1" for="region">Phone</label>
+      <input class="f-ctl" type="number" id="region" formControlName="phone">
+    </div>
+    <div class="full-width center p-3">
+      <button type="submit" class="btn-black center font-md">Sign Up</button>
+    </div>
+</form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { category } from 'src/app/models/Product';
+import { category } from 'src/app/models/Category';
 import { CatalogService } from 'src/app/modules/public/services/catalog.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CatalogService } from 'src/app/modules/public/services/catalog.service'
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  public categories = category;
+  public categories = [];
   constructor(private catalogService : CatalogService) { }
 
   ngOnInit(): void {

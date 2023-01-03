@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Product, ProductDetail, ProductState, category } from 'src/app/models/Product';
-import { listProduct, productDetail } from 'src/app/backend/listProuct';
+import { Product, ProductState } from 'src/app/models/Product';
 import { CartService } from './cart.service';
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogService {
-  products = new BehaviorSubject<Product []>(listProduct);
+  products = new BehaviorSubject<Product []>([]);
+  allproducts = new BehaviorSubject<Product []>([]);
   searchedItem = new BehaviorSubject<string>("");
+  public page :number =1;
+  productperpage:number=10;
   constructor() { }
 
   setSearchedItem(s:string){
@@ -16,29 +18,42 @@ export class CatalogService {
   }
 
   getAllProduct(){
-    this.products.next(listProduct)
+    fetch("http://10.72.128.43:8080/products")
+    .then((res)=>res.json())
+    .then((json:Product[])=>json)
+    .then(data => {this.products.next(data);this.allproducts.next(data)})
+            
   }
 
-  getProductById(id:string){
-    return listProduct.filter(i=>i.id==id)[0]
+  async getProductById(id:string){
+    let product !:Product;
+    await fetch("http://10.72.128.43:8080/products/"+id)
+    .then((res)=>res.json())
+    .then((json:Product)=>product=json)
+    console.log(product)
+    return product
   }
-  getProductDetail(id:string) : ProductDetail{
-    return productDetail.filter(i=>i.id==id)[0];
-  }
+
   filtertByName(){
     const s = this.searchedItem.value
-    for (const iterator in category) {
-      if(s.toLocaleLowerCase()==iterator.toLocaleLowerCase()){
-        this.filterbyCategory(s);
-        return;
-      }
+    // for (const iterator in category) {
+    //   if(s.toLocaleLowerCase()==iterator.toLocaleLowerCase()){
+    //     this.filterbyCategory(s);
+    //     return;
+    //   }
+    // }
+    // if(s=='') this.resetFilter
+    // else 
+    // this.products.next(this.allproducts.value.filter(i=>i.name.toLocaleLowerCase().includes(s.toLocaleLowerCase())))
+    {
+      fetch("http://10.72.128.43:8080/products")
+      .then((res)=>res.json())
+      .then((json:Product)=>json)
     }
-    if(s=='') this.resetFilter
-    else this.products.next(listProduct.filter(i=>i.name.toLocaleLowerCase().includes(s.toLocaleLowerCase())))
   }
   filterbyCategory(category :string){
     this.searchedItem.next(category)
-    this.products.next(listProduct);//return from backend
+    this.products.next(this.allproducts.value);//return from backend
   }
 
   filterbyRate(rate :number){
@@ -52,6 +67,6 @@ export class CatalogService {
   }
   resetFilter(){
     this.searchedItem.next('');
-    this.products.next(listProduct);
+    this.products.next(this.allproducts.value);
   }
 }

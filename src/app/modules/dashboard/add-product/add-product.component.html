@@ -1,0 +1,148 @@
+<div class="row jst-s_b p-5 pb-0">
+  <div class="font-xl">Product</div>
+  <div class="row g-2">
+    <button class="btn-outlined-gray font-md">Dublicate</button>
+    <button class="btn-primary font-md" (click)="submit()">Save</button>
+  </div>
+</div>
+
+<div class="row al-left gap-2 p-5" [formGroup]="addProductForm">
+  <div class="flex side">
+    <div class="card bg-white p-5">
+      <h2 class="font-md">Basic Information</h2>
+      <h3 class="font-lg m-1 text-black" >Name</h3>
+      <input class="f-ctl" type="text"  formControlName="name">
+      <mat-error><span *ngIf="addProductForm.controls['name'].errors && addProductForm.controls['name']?.touched" style="font-size: 16px;">Invalid Form</span></mat-error>
+      <h3 class="font-lg m-1 text-black" >Descrition</h3>
+      <textarea class="f-ctl" type="text"   formControlName="description" style="resize: vertical;"></textarea>
+      <mat-error><span *ngIf="addProductForm.controls['description'].errors && addProductForm.controls['description']?.touched" style="font-size: 16px;">Invalid Form</span></mat-error>
+      <!-- <h3 class="font-lg m-1 text-black" >Short Description</h3>
+      <input class="f-ctl" type="text" name="s-descrition" id="s-descrition"> -->
+    </div>
+
+    <div class="card bg-white p-5">
+      <h2>Pricing</h2>
+      <h3 class="font-lg m-1 text-black" >Price</h3>
+      <input class="f-ctl" type="number"  formControlName="price" >
+      <mat-error><span *ngIf="addProductForm.controls['price'].errors && addProductForm.controls['price']?.touched" style="font-size: 16px;">Invalid Form</span></mat-error>
+      <ng-container formGroupName="discount">
+        <h3 class="font-lg m-1 text-black" >disount Percentage</h3>
+        <input class="f-ctl" type="number"  formControlName="value">
+        <div class="row al-center p-1" style="flex-wrap: wrap;">
+          <div class="flex">
+            <h3 class="font-lg m-1 text-black" >Schedule discount Start</h3>
+            <input class="f-ctl" type="date" name="descrition" formControlName="StartAt" >
+          </div>
+          <div class="flex">
+            <h3 class="font-lg m-1 text-black" >Schedule discount End</h3>
+            <input class="f-ctl" type="date" name="descrition" formControlName="EndAt" >        
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  
+    <div class="card bg-white p-5">
+      <h2>Inventory</h2>
+      <h3 class="font-lg m-1 text-black" >Stock quantity</h3>
+      <input class="f-ctl" type="number" [(ngModel)]="productItems" min="0" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="card bg-white p-5">
+      <h2>Images</h2>
+      <h3 class="font-lg m-1 text-black" >Thumbnail</h3>
+      <app-upload 
+      (onDelete)="addProductForm.get('Thumbnail')?.setValue('')"
+      (onChange)="addProductForm.get('Thumbnail')?.setValue($event)"
+      ></app-upload>
+      <h3 class="font-lg m-1 text-black" >Images</h3>
+        <ng-container formControlName="images">
+          <ng-container *ngFor="let imageForm of images.controls; let index = index">
+            <div>
+              <app-upload 
+              (onDelete)="retrieveImage(index)"
+              (onChange)="changeUrl(imageForm,$event)"
+              ></app-upload>
+            </div>
+          </ng-container>
+        </ng-container>
+        <button type="button" (click)="addImage()" class="btn-primary font-md m-2">Add</button>
+      <!-- <input class="f-ctl" type="file" formControlName="productItems"> -->
+    </div>
+  </div>
+
+
+
+
+
+  <div class="side" style="min-width: 500px">
+
+
+
+    <div class="card bg-white p-5">
+      <div class="card-body p-5">
+        <div class="mb-5">
+          <h2>Visibility</h2>
+        </div>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="column al-left g-2 mb-2"
+          formControlName="visibility"
+          >
+          <mat-radio-button class="example-radio-button" *ngFor="let season of ['Published','Scheduled','Hidden']" [value]="season">
+            {{season}}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="addProductForm.controls['visibility']?.value=='Scheduled'">
+          <label for="form-product/seo-title" class="font-md mr-1">Publish date</label>
+          <input type="date" class="p-1 font-md" formControlName="ScheduledDate"/>
+        </div>
+      </div>
+    </div>
+          <!-- (selected)="this.selectedCategory=$event" -->
+
+
+    <div class="card bg-white p-5">
+      <div class="card-body p-5">
+          <div class="mb-5">
+              <h2 class="mb-0">Category</h2>
+          </div>
+          <app-adv-choice [options]="categories"  (selected)="addProductForm.controls['category'].setValue($event)"></app-adv-choice>
+          <div class="text-primary font-md txt m-2 touchable ">Add new category</div>
+      </div>
+    </div>
+
+
+
+    <div class="card bg-white p-5">
+      <div class="card-body p-5">
+          <div class="mb-5">
+              <h2 class="mb-0">Tags</h2>
+          </div>
+            <app-multiple-choice 
+            name="Tag" 
+            [max]="3"
+            (change)="addProductForm.controls['Tags'].setValue($event)"
+            (state)="setTagsError($event)"
+            ></app-multiple-choice>
+            <div *ngIf="!addProductForm.controls['Tags']?.valid">{{addProductForm.controls['Tags'].errors| json}}</div>
+      </div>
+    </div>
+
+    <div class="card bg-white p-5">
+      <div class="card-body p-5">
+          <div class="mb-5">
+              <h2 class="mb-0">Promo Codes</h2>
+          </div>
+            <app-multiple-choice
+            name="Promo Code" 
+            [max]="99"
+            (change)="addProductForm.controls['promoCodesList'].setValue($event)"
+            (state)="setPromoCodeError($event)"
+            ></app-multiple-choice>
+            <div *ngIf="!addProductForm.controls['promoCodesList']?.valid">{{addProductForm.controls['Tags'].errors| json}}</div>
+      </div>
+    </div>
+
+  </div>  
+</div>
+                <!-- <option selected="" data-select2-id="3">Power tools</option> -->

@@ -33,7 +33,7 @@ export class IndexComponent implements OnInit {
     this.catalogService.searchedItem.subscribe(s=>{
       this.searchItem=s;
     });
-    this.cartService.products.subscribe(ps=>this.nbr=ps.length);
+    this.cartService.cart.subscribe(ps=>this.nbr=ps.cartItems.length);
     this.favoriteService.products.subscribe(ps=>this.nbrFav=ps.length);
   }
   toHome=()=>this.router.navigate(['store','home'])

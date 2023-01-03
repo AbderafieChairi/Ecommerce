@@ -1,6 +1,6 @@
 <div class="product" (click)="goToDetails()" *ngIf="defaultView == true">
-  <img [src]="product.imgUrl" height="270" width="270" />
-  <div class="product-icon">
+  <img [src]="product.thumbnail" height="270" width="270" />
+  <!-- <div class="product-icon">
     <div *ngIf="product.state == productstate.onSale" class="discount">
       <span class="material-icons">discount</span>
     </div>
@@ -10,10 +10,9 @@
     <div *ngIf="product.state == productstate.outOfStock" class="hide_source">
       <span class="material-icons-outlined">hide_source</span>
     </div>
-    <!-- <div *ngIf="product.state==productstate.discontinued" class="not_interested"><span class="material-icons">not_interested</span></div> -->
-  </div>
+  </div> -->
   <div class="product-discount">
-    -{{ Math.round((1 - product.cost / product.prev_cost) * 100) }}%
+    -{{ product.discount.value}}%
   </div>
   <div class="add-to-cart" (click)="AddToFavorite()" *ngIf="!_inFavorite">
     <span class="material-icons-outlined favorite_border">favorite_border</span>
@@ -23,15 +22,15 @@
   </div>
   <div class="product-vars">
     <div class="product-name">{{ product.name }}</div>
-    <div class="product-cost">{{ product.cost }}£</div>
-    <div class="product-reduced_cost">{{ product.cost }}£</div>
+    <div class="product-cost">{{ product.price }}£</div>
+    <div class="product-reduced_cost">{{ product.price*(1-product.discount.value/100) }}£</div>
   </div>
 </div>
 
 <div class="product-alt" (click)="goToDetails()" *ngIf="defaultView == false">
   <div style="position: relative;">
-    <img [src]="product.imgUrl" height="270" width="270" />
-    <div class="product-icon">
+    <img [src]="product.thumbnail" height="270" width="270" />
+    <!-- <div class="product-icon">
       <div *ngIf="product.state == productstate.onSale" class="discount">
         <span class="material-icons">discount</span>
       </div>
@@ -41,11 +40,10 @@
       <div *ngIf="product.state == productstate.outOfStock" class="hide_source">
         <span class="material-icons-outlined">hide_source</span>
       </div>
-      <!-- <div *ngIf="product.state==productstate.discontinued" class="not_interested"><span class="material-icons">not_interested</span></div> -->
-    </div>
+    </div> -->
 
     <div class="product-discount">
-      -{{ Math.round((1 - product.cost / product.prev_cost) * 100) }}%
+      -{{ product.discount }}%
     </div>
     <div class="add-to-cart" (click)="AddToFavorite()" *ngIf="!_inFavorite">
       <span class="material-icons-outlined favorite_border"
@@ -59,8 +57,8 @@
   <div class="flex column al-left p-2">
     <div class="font-lg">{{ product.name }}</div>
     <div class="font-md text-secondary m-1 ml-2">category : Beauty and personal care</div>
-    <div class="font-md mt-2 text-gray l-thr" >{{ product.prev_cost }}£</div>
-    <div class="font-md mt-2 text-primary">{{ product.cost }}£</div>
+    <div class="font-md mt-2 text-gray l-thr" >{{ product.price }}£</div>
+    <div class="font-md mt-2 text-primary">{{ product.price*(1-product.discount.value/100)   }}£</div>
     <div class="flex column al-right jst-end">
       <div class="btn-outlined-primary row gap-1" 
       >

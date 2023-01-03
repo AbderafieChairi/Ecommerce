@@ -1,0 +1,35 @@
+table.dataTable {
+    clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border-color: grey;
+}
+
+
+table.dataTable > tr >th {
+    padding: 10px 13px;
+    font-size: 1rem;   
+    text-align: left;
+}
+th > title{
+    flex: 1;
+}
+th > icon{
+    padding: 5px;
+}
+table.dataTable > tr > td{
+    padding: 10px 13px;
+    font-size: 0.9rem;   
+    text-align: left;
+}
+th,td {
+    // background-color: gray;
+    border-bottom: solid 1px gray;
+}
+table.dataTable input {
+    height: 20px;
+    width: 20px;
+}

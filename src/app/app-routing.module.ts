@@ -10,7 +10,11 @@ const routes: Routes = [
     path:'admin',
     loadChildren:()=>import ('./modules/dashboard/dashboard.module').then(m=>m.DashboardModule)
   },
-];
+  {
+    path:'user',
+    loadChildren:()=>import ('./modules/user/user.module').then(m=>m.UserModule)
+  },
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{enableTracing:false})],

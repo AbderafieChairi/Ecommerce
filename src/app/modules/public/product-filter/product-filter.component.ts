@@ -33,8 +33,9 @@ export class ProductFilterComponent implements OnInit {
   constructor(private catalogService: CatalogService) { }
 
   ngOnInit(): void {
+    this.catalogService.getAllProduct();
+    this.catalogService.products.subscribe(p=>this.products=p);
     this.catalogService.searchedItem.subscribe(s=>this.searchItem=s);
-    this.catalogService.products.subscribe(s=>this.products=s);
   }
   changeSearchItem(){
     this.catalogService.setSearchedItem(this.searchItem)

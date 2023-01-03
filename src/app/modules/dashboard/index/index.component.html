@@ -27,18 +27,7 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-list>
       <div mat-subheader>Hello Admin</div>
-      <mat-list-item >
-        <span class="material-icons-round icon" matListItemIcon>space_dashboard</span>
-        <div matListItemTitle>Dashboard</div>
-      </mat-list-item>
-      <mat-list-item >
-        <span class="material-icons-outlined icon" matListItemIcon>grid_view</span>
-        <div matListItemTitle>Products</div>
-      </mat-list-item>
-      <mat-list-item >
-        <span class="material-icons-outlined icon" matListItemIcon>table_view</span>
-        <div matListItemTitle>Orders</div>
-      </mat-list-item>
+      <app-side-item [item]="item" *ngFor="let item of side"></app-side-item>
     </mat-list>
   </mat-drawer>
 

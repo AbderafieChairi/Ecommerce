@@ -1,0 +1,19 @@
+.side > *{
+    margin: 40px 10px;
+}
+
+
+// input{
+//     border: none;
+//     background-color: antiquewhite;
+//     border-bottom: solid 2px rgb(67, 95, 187);
+// }
+input,textarea:focus{
+    outline: none;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}

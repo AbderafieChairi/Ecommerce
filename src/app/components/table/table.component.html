@@ -1,0 +1,53 @@
+
+
+
+
+
+<div class="m-5 p-0 bg-white card">
+    <div class="p-2">
+        <input type="text" class="full-width search"        [ngModel]="searchedItem | async"
+        (ngModelChange)="searchedItem.next($event)" 
+        placeholder="Search ....."
+        />
+    </div>
+    <table class="dataTable full-width" *ngIf="_listData.length > 0">
+        <tr class="full-width">
+            <th><input type="checkbox" [(ngModel)]="allselected" (click)="selectAll()"></th>
+            <th *ngFor="let head of displayedColumns">
+                <div class="row al-center touchable"  (click)="setSortedBy(head)">
+                    <div class="flex">{{head.name}}</div>
+                    <div class="p-2">
+                        <div *ngIf="head.sel==false">
+                            <span class="material-icons text-gray-light-3">unfold_more</span>
+                        </div>
+                        <div *ngIf="head.sel==true">
+                            <span class="material-icons touchable text-hover-gray"
+                            *ngIf="head.asc=='ASC'"
+                            >expand_less</span>
+                            <span class="material-icons touchable text-hover-gray"
+                            *ngIf="head.asc=='DESC'"
+                            >expand_more</span>
+                        </div>
+                    </div>
+                </div>
+
+            </th>
+        </tr>
+
+        <ng-content></ng-content>
+    
+    </table>
+    <div class="full-width" *ngIf="_listData.length > 0">
+        <mat-paginator [length]="filteredData.value.length" [pageSizeOptions]="[3, 6, 9]" aria-label="Select page"
+        (page)="onPageChange($event)"
+        >
+    </mat-paginator>
+    </div>
+
+</div>
+
+
+
+
+
+

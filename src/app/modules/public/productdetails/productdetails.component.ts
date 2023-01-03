@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogService } from '../services/catalog.service';
-import { Product, ProductDetail, ProductState } from 'src/app/models/Product';
+import { Product, ProductState } from 'src/app/models/Product';
 import { FavoriteService } from '../services/favorite.service';
 import { CartService } from '../services/cart.service';
+import { BehaviorSubject } from 'rxjs';
+import { Cart } from 'src/app/models/Cart';
 
 @Component({
   selector: 'app-productdetails',
@@ -11,8 +13,8 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./productdetails.component.scss']
 })
 export class ProductdetailsComponent implements OnInit {
+  public loading = new BehaviorSubject<Boolean>(true);
   public product !:Product;
-  public productDetail !:ProductDetail;
   public Math=Math;
   public _inFavorite =false
   public _inCart =false
@@ -25,14 +27,19 @@ export class ProductdetailsComponent implements OnInit {
     private cartService :CartService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.cartService.init()
     const id = this.route.snapshot.paramMap.get('id')!;
-    this.product = this.catalogService.getProductById(id);
-    this.productDetail = this.catalogService.getProductDetail(id);
+    this.loading.next(true)
+    this.catalogService.getProductById(id).then(p=>{this.loading.next(false);this.product = p})
     this.favoriteService.products.subscribe(ps=>{this._inFavorite=this.inFavorite() })
-    this.cartService.products.subscribe(ps=>{
-      this._inCart=this.isInCart();
-      this.quantity=ps.filter(i=>i.product.id==this.product.id)[0].quantity;
+    this.cartService.cart.subscribe(ps=>{
+      if (ps!={}as Cart){
+        console.log(ps);
+        console.log(ps.cartItems.map(ci=>ci.product.id.toString()).includes(id));
+        this._inCart=ps.cartItems.map(ci=>ci.product.id.toString()).includes(id)
+        this.quantity=ps.cartItems.filter(i=>i.product.id==this.product.id)[0].quantity;
+      }
     })
   }
 
@@ -53,9 +60,7 @@ export class ProductdetailsComponent implements OnInit {
     return this.cartService.isInCart(this.product.id);
   }
   retrieveFromCart(){
-    this.cartService.retrieveFromCart(this.product.id);
+    // this.cartService.removeFromCart(this.product.id);
   }
-  public addQuantity(){this.cartService.addQuantity(this.product.id)}
-  public reduceQuantity(){this.cartService.reduceQuantity(this.product.id)}
 
 }

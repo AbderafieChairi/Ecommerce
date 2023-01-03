@@ -1,0 +1,21 @@
+<div class="m-2">
+    <ng-container *ngIf="url==''">
+        <label for="upload" class="btn-outlined-primary font-md full-width txt">{{filename!=""?"uploading ....":"Select image"}}</label>
+        <input 
+        type="file" 
+        name="upload" 
+        id="upload" 
+        (change)="getFile($event)"
+        style="display: none;"
+        accept="image/png, image/gif, image/jpeg" 
+    >
+    </ng-container>
+    <div *ngIf="url!=''" class="row g-1 jst-s_b al-center p-2 mb-2" style="border-bottom: solid 1px black;">
+        <img [src]="url" width="100px" height="100px">
+        <div (click)="delete()" class="touchable">
+            <span class="material-icons">close</span>
+        </div>
+    </div>
+</div>
+
+

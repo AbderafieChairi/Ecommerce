@@ -51,4 +51,5 @@ img {
 }
 .touchable:hover{
   cursor: pointer;
+  user-select: none;
 }
