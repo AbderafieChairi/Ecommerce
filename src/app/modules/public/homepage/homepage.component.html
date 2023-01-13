@@ -1,4 +1,85 @@
 <div class="container1">
+    <div class="row full-width pl-5">
+        <div>
+            <div class="br-gray p-3 m-5 card bg-white" style="min-width: 400px;">
+                <div class="font-lg m-2">CATEGORIES</div>
+                <div class="ml-3">
+                    <div *ngFor="let caterogy of categories" class="font-md text-gray touchable p-1 text-hover-gray-dark-5" style="width: 80%;">
+                        {{caterogy.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="br-gray p-3 m-5 card bg-white" style="min-width: 400px;">
+                <div class="font-lg m-2">Prices</div>
+                <div class="mb-2 mt-2">
+                  <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="priceOptions"></ngx-slider>
+                </div>
+                <div class="display-f jst-end">
+                    <div class="btn-primary p-2 font-md">Filter</div>
+                </div>
+            </div>
+            <div class="br-gray p-3 m-5 card bg-white" style="min-width: 400px;">
+                <div class="font-lg m-2">Discount</div>
+                <div class="row jst-start al-center g-2 mt-3">
+                  <div class="mb-2 mt-2 full-width">
+                    <ngx-slider [(value)]="discount"[options]="discountOptions"></ngx-slider>
+                  </div>
+                    <div class="font-md">{{discount}}</div>
+                </div>
+                <div class="display-f jst-end">
+                    <div class="btn-primary p-2 font-md">Filter</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex m-5">
+            <!-- <div class="products">
+                <div *ngFor="let item of products" >
+                   
+                    <app-simple-product [product]="item" [defaultView]="true"></app-simple-product>
+                </div>    
+            </div> -->
+            <div class="flex ">
+                <div class="product_catgery card bg-white">
+                  <div  class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
+                    <div class="font-lg text-primary">Products</div>
+                    <div class="Fiter_by">
+                      <button mat-button [matMenuTriggerFor]="menu" class="font-md">Sort by: {{filterBy}} 
+                        <span class="material-icons p-2 font-lg">expand_more</span>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngFor="let item of f | keyvalue" (click)="setFilterBy(item.value)"
+                          class="p-2 font-md"
+                        >{{item.value}}</button>
+                      </mat-menu>
+                    </div>
+                  </div>
+                  <div class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
+                    <div class="font-md">80 results</div>
+                    <div class="row">
+                      <div class="touchable" (click)="setGridView(false)">
+                        <span class="material-icons apperence font-xl" [ngStyle]="{color:GridView?'#333':'orange'}">view_list</span>
+                      </div>
+                      <div class="touchable" (click)="setGridView(true)">
+                        <span class="material-icons apperence font-xl" [ngStyle]="{color:GridView?'orange':'#333'}">view_module</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="products"  [ngStyle]="{flexDirection:GridView?'row':'none',alignItems:'center',display:GridView?'flex':'block'}">
+                      <app-simple-product [product]="item" [defaultView]='GridView' *ngFor="let item of filteredProduct"></app-simple-product>
+                  </div>
+                  <div class="full-width">
+                    <mat-paginator [length]="filteredProduct.length" [pageSizeOptions]="[3, 6, 9]" aria-label="Select page" class="font-md">
+                    </mat-paginator>
+                    </div>
+                </div>
+              </div>
+
+        </div>
+    </div>
+    <!-- (page)="onPageChange($event)" -->
+
+
     <div>
         <!-- <div class="info">
             <div>
@@ -7,21 +88,8 @@
                 <div><span class="material-icons-outlined hide_source"> hide_source</span> <p>out Of Stock</p></div>
             </div>
         </div> -->
-        <div class="products">
-            <div *ngFor="let item of products" >
-                <app-simple-product [product]="item" [defaultView]="true"></app-simple-product>
-            </div>    
-        </div>
-        <div class="pd-1 row jst-center">
-            <div class="br-primary row gap-2 br-xs hidden m-2">
-              <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">previous</div>
-              <div [class]="page==1?'txt text-white touchable bg-primary font-md p-3':'txt text-primary touchable text-hover-primary-light-7 font-md p-3'">1</div>
-              <div [class]="page==2?'txt text-white touchable bg-primary font-md p-3':'txt text-primary touchable text-hover-primary-light-7 font-md p-3'">2</div>
-              <div [class]="page==3?'txt text-white touchable bg-primary font-md p-3':'txt text-primary touchable text-hover-primary-light-7 font-md p-3'">3</div>
-              <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3">...</div>
-              <div class="txt text-primary touchable text-hover-primary-light-7 font-md p-3" (click)="next()">next</div>
-            </div>
-        </div>
+
+
     </div>
 </div>
 

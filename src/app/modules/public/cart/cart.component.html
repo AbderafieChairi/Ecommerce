@@ -12,12 +12,12 @@
               <th>Remove</th>
               <th>Price</th>
             </tr>
-            <tr *ngIf="products.length==0">
+            <tr *ngIf="cart?.length==0">
                 <td [colSpan]="5" class="empty">
                     Cart list empty
                 </td>
             </tr>
-            <tr *ngFor="let item of products">
+            <tr *ngFor="let item of cart">
                 <td class="img">
                     <img [src]='item.product.thumbnail' height="150" width="150"/>
                 </td>
@@ -26,11 +26,11 @@
                 </td>
                 <td >
                     <div class="row jst-start gap-2 al-center">
-                        <div class="btn-secondary font-md p-1" (click)="reduceQuantity(item.id)">
+                        <div class="btn-secondary font-md p-1" (click)="reduceQuantity(item.product.id)">
                             <span class="material-icons">remove</span>
                         </div>
                         <div class="font-md" >{{item.quantity}}</div>
-                        <div class="btn-secondary font-md p-1" (click)="addQuantity(item.id)">
+                        <div class="btn-secondary font-md p-1" (click)="addQuantity(item.product.id)">
                             <span class="material-icons">add</span>
                         </div>                      
                     </div>
@@ -38,7 +38,7 @@
                 </td>
                 <td >
                     <div class="center column al-left">
-                        <div class="btn-gray font-md p-1" (click)="removeFromCart(item.id)">
+                        <div class="btn-gray font-md p-1" (click)="removeFromCart(item.product.id)">
                             <span class="material-icons">close</span>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
             </div>
             <div>
                 <div class="checkout button">
-                    <div class="check-title">Checkout</div>
+                    <div class="check-title" (click)="createCheckout()">Checkout</div>
                     <div>
                         <span class="material-icons" style="color: white;">shopping_bag</span>
                     </div>

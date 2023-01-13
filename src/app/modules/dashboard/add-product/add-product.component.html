@@ -5,7 +5,7 @@
     <button class="btn-primary font-md" (click)="submit()">Save</button>
   </div>
 </div>
-
+<!-- shortdetails -->
 <div class="row al-left gap-2 p-5" [formGroup]="addProductForm">
   <div class="flex side">
     <div class="card bg-white p-5">
@@ -14,8 +14,10 @@
       <input class="f-ctl" type="text"  formControlName="name">
       <mat-error><span *ngIf="addProductForm.controls['name'].errors && addProductForm.controls['name']?.touched" style="font-size: 16px;">Invalid Form</span></mat-error>
       <h3 class="font-lg m-1 text-black" >Descrition</h3>
-      <textarea class="f-ctl" type="text"   formControlName="description" style="resize: vertical;"></textarea>
-      <mat-error><span *ngIf="addProductForm.controls['description'].errors && addProductForm.controls['description']?.touched" style="font-size: 16px;">Invalid Form</span></mat-error>
+      <textarea class="f-ctl" type="text"   formControlName="details" style="resize: vertical;"></textarea>
+      <h3 class="font-lg m-1 text-black" >Short Descrition</h3>
+      <textarea class="f-ctl" type="text"   formControlName="shortdetails" style="resize: vertical;"></textarea>
+      <mat-error><span *ngIf="addProductForm.controls['shortdetails'].errors && addProductForm.controls['shortdetails']?.touched" style="font-size: 16px;">Invalid Form</span></mat-error>
       <!-- <h3 class="font-lg m-1 text-black" >Short Description</h3>
       <input class="f-ctl" type="text" name="s-descrition" id="s-descrition"> -->
     </div>
@@ -31,11 +33,11 @@
         <div class="row al-center p-1" style="flex-wrap: wrap;">
           <div class="flex">
             <h3 class="font-lg m-1 text-black" >Schedule discount Start</h3>
-            <input class="f-ctl" type="date" name="descrition" formControlName="StartAt" >
+            <input class="f-ctl" type="date" name="descrition" formControlName="startAt" >
           </div>
           <div class="flex">
             <h3 class="font-lg m-1 text-black" >Schedule discount End</h3>
-            <input class="f-ctl" type="date" name="descrition" formControlName="EndAt" >        
+            <input class="f-ctl" type="date" name="descrition" formControlName="endAt" >        
           </div>
         </div>
       </ng-container>
@@ -45,14 +47,14 @@
     <div class="card bg-white p-5">
       <h2>Inventory</h2>
       <h3 class="font-lg m-1 text-black" >Stock quantity</h3>
-      <input class="f-ctl" type="number" [(ngModel)]="productItems" min="0" [ngModelOptions]="{standalone: true}">
+      <input class="f-ctl" type="number" formControlName="quantity" min="0">
     </div>
     <div class="card bg-white p-5">
       <h2>Images</h2>
       <h3 class="font-lg m-1 text-black" >Thumbnail</h3>
       <app-upload 
-      (onDelete)="addProductForm.get('Thumbnail')?.setValue('')"
-      (onChange)="addProductForm.get('Thumbnail')?.setValue($event)"
+      (onDelete)="addProductForm.get('thumbnail')?.setValue('')"
+      (onChange)="addProductForm.get('thumbnail')?.setValue($event)"
       ></app-upload>
       <h3 class="font-lg m-1 text-black" >Images</h3>
         <ng-container formControlName="images">
@@ -100,13 +102,13 @@
     </div>
           <!-- (selected)="this.selectedCategory=$event" -->
 
-
+    <ng-container [formGroup]="category"></ng-container>
     <div class="card bg-white p-5">
       <div class="card-body p-5">
           <div class="mb-5">
               <h2 class="mb-0">Category</h2>
           </div>
-          <app-adv-choice [options]="categories"  (selected)="addProductForm.controls['category'].setValue($event)"></app-adv-choice>
+          <app-adv-choice [options]="categories"  (selected)="category.controls['id'].setValue($event)"></app-adv-choice>
           <div class="text-primary font-md txt m-2 touchable ">Add new category</div>
       </div>
     </div>
@@ -121,8 +123,8 @@
             <app-multiple-choice 
             name="Tag" 
             [max]="3"
-            (change)="addProductForm.controls['Tags'].setValue($event)"
-            (state)="setTagsError($event)"
+            [form]="Tags"
+            (change)="Tags = $event"
             ></app-multiple-choice>
             <div *ngIf="!addProductForm.controls['Tags']?.valid">{{addProductForm.controls['Tags'].errors| json}}</div>
       </div>
@@ -136,10 +138,10 @@
             <app-multiple-choice
             name="Promo Code" 
             [max]="99"
-            (change)="addProductForm.controls['promoCodesList'].setValue($event)"
-            (state)="setPromoCodeError($event)"
+            [form]="promoCodes"
+            (change)="promoCodes=$event"
             ></app-multiple-choice>
-            <div *ngIf="!addProductForm.controls['promoCodesList']?.valid">{{addProductForm.controls['Tags'].errors| json}}</div>
+            <div *ngIf="!addProductForm.controls['promoCodes']?.valid">{{addProductForm.controls['Tags'].errors| json}}</div>
       </div>
     </div>
 

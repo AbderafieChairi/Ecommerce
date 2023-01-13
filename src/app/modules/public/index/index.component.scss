@@ -96,3 +96,26 @@
     user-select: none;
     cursor: pointer;
 }
+
+
+
+.chat{
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+}
+.chat-icon{
+    height: 50px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(68, 165, 203);
+    border-radius: 50%;
+}
+
+.chat-bot{
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+}

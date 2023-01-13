@@ -1,86 +1,85 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Cart } from 'src/app/models/Cart';
-import { Product, ProductCart } from 'src/app/models/Product';
+import { CartItem } from 'src/app/models/Cart';
+import { Product } from 'src/app/models/Product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  price = new BehaviorSubject<number>(0)
-  cart =new BehaviorSubject<Cart>({} as Cart)
-  constructor() {
-    this.cart.subscribe(
-      args=>{
-        this.price.next(args.cartItems.reduce(
-          (i,j)=>i+j.product.price*j.quantity,0
-        ))
-      }
-    )
+  cart = new BehaviorSubject<CartItem[]>([]);
+  price = new BehaviorSubject<number>(0);
+
+  constructor(){
+    this.cart.subscribe(ca=>{
+      this.price.next(this.countTotalPrice());
+    })
   }
 
-  async init(){
+
+  init(){
     console.log("init ....")
-    const cart_id = localStorage.getItem("cart_id")
-    if (cart_id==null){
+    const cart_st = localStorage.getItem("cart")
+    if (cart_st==null){
       console.log("create Cart")
-      fetch('http://10.72.128.43:8080/cart',{
-        method:'POST',
-        body:JSON.stringify({alue:'hhhh'}),
-        headers:{
-          "Content-Type":"application/json; charset=utf8"
-        }
-      })
-      .then(res=>res.json())
-      .then((json:Cart)=>{localStorage.setItem("cart_id",json.id.toString());this.cart.next(json)})
+      localStorage.setItem("cart",JSON.stringify([]));
     }else{
-      console.log("get Cart")
-      fetch('http://10.72.128.43:8080/cart/'+cart_id)
-      .then(res=>res.json())
-      .then((json:Cart)=>this.cart.next(json))
+      this.cart.next(JSON.parse(cart_st))
     }
   }
+  submit(){
+    localStorage.setItem("cart",JSON.stringify(this.cart.value))
+  }
 
-  post(endpoint:String,data:any){
-    return fetch('http://10.72.128.43:8080/'+endpoint,{
-      method:'POST',
-      body:JSON.stringify(data),
-      headers:{
-        "Content-Type":"application/json; charset=utf8"
+  addProductToCart(product: Product) {
+    let cartItems = this.cart.value;
+    let cartItem = cartItems.find(x => x.product.id == product.id);
+    if (cartItem) {
+      cartItem.quantity++;
+    } else {
+      cartItems.push({ product: product, quantity: 1 });
+    }
+    this.cart.next(cartItems);
+    this.submit()
+  }
+
+  addQuantity(productId: number) {
+    let cartItems = this.cart.value;
+    let cartItem = cartItems.find(x => x.product.id == productId);
+    if (cartItem) {
+      cartItem.quantity++;
+      this.cart.next(cartItems);
+    }
+    this.submit()
+  }
+
+  reduceQuantity(productId: number) {
+    let cartItems = this.cart.value;
+    let cartItem = cartItems.find(x => x.product.id == productId);
+    if (cartItem) {
+      cartItem.quantity--;
+      if (cartItem.quantity == 0) {
+        this.removeProductFromCart(productId);
+      } else {
+        this.cart.next(cartItems);
       }
-    });
-  }
-  async get(endpoint:String){
-    return fetch('http://10.72.128.43:8080/'+endpoint)
-  }
-  delete(endpoint:String){
-    console.log('http://10.72.128.43:8080/'+endpoint)
-    return fetch('http://10.72.128.43:8080/'+endpoint)
-  }
-  public getProduct(){
-    return this.cart;
-  }
-  public addToCart(product :Product){
-    console.log("add to cart function")
-    this.post('cartitem/'+this.cart.value.id,{quantity:1,product})
-    .then(res=>this.init())
-  }
-  removeFromCart(id : number){
-    this.get("cart/"+this.cart.value.id+"/"+id)
-    .then(res=>this.init())
-    
-  }
-  isInCart(id:string):boolean{
-    return this.cart.value.cartItems.map(ci=>ci.product.id).includes(id)
+    }
+    this.submit()
   }
 
-  addQuantity=(id:number)=>{
-    this.get("cartitem/add/"+id)
-    .then(res=>this.init())
+  removeProductFromCart(productId: number) {
+    let cartItems = this.cart.value;
+    let updatedCartItems = cartItems.filter(x => x.product.id != productId);
+    this.cart.next(updatedCartItems);
+    this.submit()
   }
-  reduceQuantity=(id:number)=>{
-    this.get("cartitem/retieve/"+id)
-    .then(res=>this.init()) 
+
+  countTotalPrice() {
+    let total = 0;
+    let cartItems = this.cart.value;
+    cartItems.forEach(x => {
+      total += x.quantity * x.product.price;
+    });
+    return total;
   }
 }
-

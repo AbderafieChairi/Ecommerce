@@ -1,6 +1,7 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
+import { category } from 'src/app/models/Category';
 
 
 
@@ -17,23 +18,23 @@ import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
 export class AdvChoiceComponent implements OnInit {
 
   myControl = new FormControl(null, [Validators.required,this.check()]);
-  @Input() options: String[]=[];
+  @Input() options: category[]=[];
 
   
   filteredOptions!: Observable<String[]>;
-  @Output() selected = new EventEmitter<String>();
-  selctedValue:string="";
-  _isWrong :boolean=false;
+  @Output() selected = new EventEmitter<number>();
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(startWith(''),map(value => this._filter(value || '')),);
-    this.myControl.valueChanges.subscribe(()=>this.selected.emit(this.myControl.value || ""))
+    this.myControl.valueChanges.subscribe(()=>this.selected.emit(
+      this.options.filter(i=>i.name==this.myControl.value)[0].id
+    ))
     
   }
   
   private _filter(value: String): String[] {
     const filterValue = value.toLowerCase();
     if(this.options?.length >0)
-      return this.options.filter(option => option.toLowerCase().includes(filterValue));
+      return this.options.filter(option => option.name.toLowerCase().includes(filterValue)).map(i=>i.name);
     return [];
   }
   check(): ValidatorFn{

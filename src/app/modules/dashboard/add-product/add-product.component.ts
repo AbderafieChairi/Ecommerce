@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {FormArray, FormControl, FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
+import { ProductService } from '../services/product.service';
+import { CategoryService } from '../services/category.service';
+import { category } from 'src/app/models/Category';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -10,39 +13,48 @@ import {map, startWith} from 'rxjs/operators';
 export class AddProductComponent implements OnInit {
   addProductForm !: FormGroup;
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private ps:ProductService,
+    private cs: CategoryService
   ){}
 
 
   ngOnInit(): void {
     this.addProductForm = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-      description: new FormControl(null, [Validators.required]),
-      thumbnail: new FormControl(null, [Validators.required]),
+      details: new FormControl(null, [Validators.required]),
+      shortdetails: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
       discount: new FormGroup({
         value:new FormControl(null, [Validators.required]),
-        StartAt:new FormControl(null, [Validators.required]),
-        EndAt:new FormControl(null, [Validators.required])
+        startAt:new FormControl(null, [Validators.required]),
+        endAt:new FormControl(null, [Validators.required])
       }),
-      category: new FormControl(null, [Validators.required]),
-      Tags: new FormControl([], []),
-      promoCodesList: new FormControl([], []),
-      Thumbnail: new FormControl(null, [Validators.required]),
+      // category: new FormControl(null, [Validators.required]),
+      category: new FormGroup({
+        id: new FormControl('', [Validators.required])
+      }),
+      Tags: this.fb.array([]),
+      promoCodes:this.fb.array([]),
+      thumbnail: new FormControl(null, [Validators.required]),
       images: this.fb.array([]),
-      productItems: new FormControl([], []),
+      quantity: new FormControl(null, []),
       visibility: new FormControl(null, []),
       ScheduledDate: new FormControl(null, []),
-
+    });
+    this.cs.categories.subscribe(s=>{
+      console.log(s);
+      this.categories=s
     });
   }
-  // Thumbnail promoCodesList
-  categories : String[]=["Power tools","Screwdrivers","Chainsaws","Hand tools","Machine tools","Power machinery","Measurements"]
+  // Thumbnail promoCodes
+  categories : category[]=[];
   selectedTags :String="";
   selectedList :String[]=[];
 
   submit(){
-    console.log(this.addProductForm.value)
+    console.log(this.addProductForm.value);
+    this.ps.addProduct(this.addProductForm.value);
   }
 
   setTagsError(event:Boolean){
@@ -50,26 +62,32 @@ export class AddProductComponent implements OnInit {
     else this.addProductForm.controls['Tags'].setErrors(null);
   }
   setPromoCodeError(event:Boolean){
-    if(event) this.addProductForm.controls['promoCodesList'].setErrors({'incorrect': true});
-    else this.addProductForm.controls['promoCodesList'].setErrors(null);
+    if(event) this.addProductForm.controls['promoCodes'].setErrors({'incorrect': true});
+    else this.addProductForm.controls['promoCodes'].setErrors(null);
   }
 
   setSelectedList(entry:String[]){
     this.selectedList=entry;
   }
-  get productItems(){
-    return this.addProductForm.controls['productItems'].value.length;
-  }
-  set productItems(productItems :Number){
-    this.addProductForm.controls['productItems'].setValue(
-      [...Array(productItems).keys()].map(i=>{return {
-        isbn:(Math.random() + 1).toString(36).substring(2)
-      }})
-    )
-    // return this.addProductForm.controls['productItems'].value.length;
+
+  get category(){
+    return this.addProductForm.controls['category'] as FormGroup
   }
 
 
+  get Tags(){
+    return this.addProductForm.controls['Tags'] as FormArray;
+  }
+  set Tags(form :FormArray){
+    this.addProductForm.controls['Tags'] = form;
+  }
+
+  get promoCodes(){
+    return this.addProductForm.controls['promoCodes'] as FormArray;
+  }
+  set promoCodes(form :FormArray){
+    this.addProductForm.controls['promoCodes'] = form;
+  }
 
   public get images(){
     return this.addProductForm.controls['images'] as FormArray;

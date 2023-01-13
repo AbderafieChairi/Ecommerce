@@ -2,20 +2,23 @@ import { category } from "./Category";
 import { Tag } from "./Tag";
 
 export interface Product {
-    id: string;
-    name: string;
-    thumbnail:string;
+    id: number;
+    name: String;
+    thumbnail:String;
     price:number;
     rating:number;
     category:category;
     tags:Tag[];
-    images:string[];
-    details:string;
-    shortdetails:string;
+    images:Image[];
+    details:String;
+    shortdetails:String;
     createdAt:Date;
     productItemsList:ProdcutItem[];
     discount:discount;
     modifiedAt:Date;
+    visiblity:String;
+    scheduledDate:Date;
+    state:String;
 }
 interface ProdcutItem{
     isbn:number;
@@ -27,18 +30,24 @@ export interface discount{
     modifiedAt:Date;
     endAt:Date;
 }
+
+
+export interface Image{
+    id:number;
+    url:String;
+}
 export interface ProductData{
-    id:string;
-    name: string;
-    thumbnail:string;
+    id:number;
+    name: String;
+    thumbnail:String;
     price:number;
-    category:string;
-    stock:string;
+    category:String;
+    state:String;
 }
 export const ProductDataTitle:any={
     name: "Product",
     category:"Category",
-    stock:"Stock" , 
+    state:"Stock" , 
     price:'Price'
 }
 export enum ProductState{
@@ -46,17 +55,6 @@ export enum ProductState{
     new='New',
     outOfStock='Out of stock',
 }
-
-
-
-
-export interface ProductCart{
-    product:Product,
-    quantity:number
-}
-
-
-
 
 
 

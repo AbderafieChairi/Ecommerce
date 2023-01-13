@@ -11,10 +11,12 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,6 @@ import { FormsModule } from '@angular/forms';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
-    AngularFireAuthModule,
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],

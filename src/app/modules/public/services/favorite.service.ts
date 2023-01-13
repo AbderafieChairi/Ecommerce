@@ -11,10 +11,10 @@ export class FavoriteService {
   addToFavorite(p:Product){
     this.products.next([...this.products.value,p])
   }
-  removeFromFavorite(id:string){
+  removeFromFavorite(id:number){
     this.products.next(this.products.value.filter(i=>i.id!=id))
   }
-  inFavorite(id:string):boolean{
+  inFavorite(id:number):boolean{
     return this.products.value.map(i=>i.id).includes(id);
   }
 }

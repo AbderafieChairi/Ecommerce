@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div class="product-alt" (click)="goToDetails()" *ngIf="defaultView == false">
+<div class="product-alt touchable" (click)="goToDetails()" *ngIf="defaultView == false">
   <div style="position: relative;">
     <img [src]="product.thumbnail" height="270" width="270" />
     <!-- <div class="product-icon">
@@ -43,7 +43,7 @@
     </div> -->
 
     <div class="product-discount">
-      -{{ product.discount }}%
+      -{{ product.discount.value }}%
     </div>
     <div class="add-to-cart" (click)="AddToFavorite()" *ngIf="!_inFavorite">
       <span class="material-icons-outlined favorite_border"
@@ -55,20 +55,12 @@
     </div>
   </div>
   <div class="flex column al-left p-2">
-    <div class="font-lg">{{ product.name }}</div>
-    <div class="font-md text-secondary m-1 ml-2">category : Beauty and personal care</div>
+    <div class="font-lg m-3" style="font-weight: bold;">{{ product.name }}</div>
+    <div class="font-md text-secondary mt-2">category : Beauty and personal care</div>
     <div class="font-md mt-2 text-gray l-thr" >{{ product.price }}£</div>
     <div class="font-md mt-2 text-primary">{{ product.price*(1-product.discount.value/100)   }}£</div>
-    <div class="flex column al-right jst-end">
-      <div class="btn-outlined-primary row gap-1" 
-      >
-        <span class="material-icons">
-            add_shopping_cart
-            </span>
-        <div class="font-md">Add to Cart</div>
-    </div>
-    </div>
-    
+    <div class="font-md mt-2 text-black">short Discription : {{product.shortdetails}}</div>
+
   </div>
 </div>
 <!-- (click)="addToCart()" *ngIf="!_inCart" -->

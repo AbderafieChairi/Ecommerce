@@ -1,11 +1,23 @@
-<!-- <Chat-bot class="chat-window"
-                              [token]="accessToken"
-                              [msg]="message"
-                              >
-               <ng-template>
-               </ng-template>
-             </Chat-bot> -->
-
+<div class="card g white chat-container p-0 display-f column m-5">
+  <div class="bg-primary row al-center jst-s_b p-2" style="height: 70px;">
+    <div class="font-lg text-white">Shopme</div>
+    <div>
+      <span class="material-icons touchable" style="color: white;">clear</span>
+    </div>
+  </div>
+  <div class="flex bg-gray-light-9" style="overflow-y: scroll;">
+    <div class="column {{msg.me?'al-right':'al-left'}} p-1" *ngFor="let msg of chat">
+      <div class="bg-primary-light-7 pt-1 pb-1 pl-2 pr-2 font-md" style="border-radius: 5px; max-width: 200px;">{{msg.msg}}</div>
+    </div>
+  
+  </div>
+  <form (submit)="getResponse()" class="form row al-center">
+    <input [(ngModel)]="message" class="flex p-1 font-md inp" aria-multiline="true" [ngModelOptions]="{standalone: true}"/>
+    <span class="material-icons m-1 touchable text-hover-gray">
+      send
+    </span>
+  </form>
+</div>
 
 
 

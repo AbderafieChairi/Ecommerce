@@ -27,25 +27,7 @@
     </div>
     
     <span class="example-spacer">
-      <div class="input-container">
-        <!-- <a routerLink="/store/filter" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;"> -->
-        <div (click)="researchByName()">
-          <span class="material-icons search">
-            search
-            </span>
-        </div>
-
-        <!-- </a> -->
-        <input [(ngModel)]="searchItem"  (ngModelChange)="changeSearchItem()"
-          placeholder="search Product,Category,Mark ..."
-        />
-        <div (click)="resetsearchItem()">
-          <span class="material-icons close" *ngIf="searchItem!=''">
-            close
-          </span>
-        </div>
-
-      </div>
+      <app-search></app-search>
     </span>
     <div class="icon">
       <a routerLink="/store/favorite" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;">
@@ -78,5 +60,19 @@
   <div class="example-sidenav-content">
     <router-outlet></router-outlet>
   </div>
-
+  <div class="chat">
+    <div class="chat-icon touchable" (click)="changeChat()">
+        <span class="material-icons">
+            textsms
+        </span>
+    </div>
+    <iframe
+        *ngIf="chat"
+        class="chat-bot card"
+        
+        width="350"
+        height="430"
+        src="https://console.dialogflow.com/api-client/demo/embedded/abb82bde-7648-49f4-9c19-10125243e532">
+    </iframe>
+</div>
 </mat-drawer-container>

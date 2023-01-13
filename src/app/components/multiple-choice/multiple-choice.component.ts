@@ -1,5 +1,6 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ViewChild,OnInit, Output, EventEmitter,Input} from '@angular/core';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 @Component({
   selector: 'app-multiple-choice',
@@ -7,10 +8,14 @@ import {MatChipInputEvent} from '@angular/material/chips';
   styleUrls: ['./multiple-choice.component.scss']
 })
 export class MultipleChoiceComponent implements OnInit {
+  @Input() form !: FormArray;
   @Input() name !:String;
   @Input() max !:number;
   ngOnInit(): void {
-    
+    this.fb.array([])
+  }
+  constructor(private fb : FormBuilder){
+
   }
   visible: boolean = true;
   selectable: boolean = true;
@@ -23,8 +28,7 @@ export class MultipleChoiceComponent implements OnInit {
   @ViewChild("chipList") chipList:any;
 
   fruits:String[] = [];
-  @Output() change = new EventEmitter<String []>();
-  @Output() state = new EventEmitter<Boolean>();
+  @Output() change = new EventEmitter<FormArray>();
 
   add(event: MatChipInputEvent): void {
     let input = event.input;
@@ -33,7 +37,8 @@ export class MultipleChoiceComponent implements OnInit {
     // Add our fruit
     if ((value || "").trim()) {
       this.fruits.push(value.trim());
-      this.change.emit(this.fruits)
+      this.addItem(value.trim())
+      this.change.emit(this.form);
     }
 
     // Reset the input value
@@ -43,8 +48,20 @@ export class MultipleChoiceComponent implements OnInit {
 
     if (this.fruits.length >this.max) {
       this.chipList.errorState = true;
-      this.state.emit(true)
+      this.form.setErrors({invalide:true})
     }
+  }
+
+  addItem(val:String){
+    const item = this.fb.group({
+      value:new FormControl(val, []),
+    })
+    this.form.push(item);
+  }
+
+  retrieveImage(index:number){
+    this.form.removeAt(index);
+    this.change.emit(this.form);
 
   }
 
@@ -53,16 +70,17 @@ export class MultipleChoiceComponent implements OnInit {
 
     if (index >= 0) {
       this.fruits.splice(index, 1);
+      this.retrieveImage(index);
     }
 
     if (this.fruits.length <=this.max) {
       this.chipList.errorState = false;
-      this.state.emit(false)
+      this.form.setErrors(null)
     }
   }
 
   setError() {
     this.chipList.errorState = true;
-    this.state.emit(true)
+    this.form.setErrors({invalide:true})
   }
 }

@@ -1,0 +1,29 @@
+
+<div class="full-width">
+    <div class="font-xl m-3">
+        {{user.name}}
+    </div>
+    <div class="full-width row g-3 p-5">
+        <div class="p-3 card bg-white">
+            <div style="height: 200px;aspect-ratio: 1;border-radius: 50%;margin: 10px auto;" class="bg-gray mb-2"></div>
+            <div class="font-md m-2 txt"><b>{{user.name}}</b></div>
+            <div class="font-md m-2 txt text-blue-light-4">{{user.email}}</div>
+            <div class="font-md m-2 txt text-gray-light-4">{{user.phone}}</div>
+            <div style="width: 80%;"><hr class="font-md m-2 text-gray"/></div>
+        <div class="font-md m-2"><b>Last Order</b></div>
+        <div class="font-md m-2"><b>Average Order Value</b></div>
+        <div class="font-md m-2"><b>Registered At</b></div>
+        <div class="text-gray txt font-md">{{user.createdAt}}</div>
+        <div class="font-md m-2"><b>Activated Email</b></div>
+        <div class="text-gray txt font-md">{{user.active?"Active":"Not Yet"}}</div>
+        </div>
+        <div class="flex card bg-white">
+            <!-- <app-table
+                [listData]="productList"
+                (list)="setTableData($event)"
+                [displayedColumns]="displayedColumns"
+                >
+                </app-table> -->
+        </div>
+    </div>
+</div>

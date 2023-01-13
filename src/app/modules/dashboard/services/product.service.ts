@@ -12,18 +12,33 @@ export class ProductService {
 
 
   getAll(){
-    fetch("http://10.72.128.43:8080/products")
+    fetch("http://localhost:8080/products")
     .then(res=>res.json())
     .then(json=>{console.log(json);return json})
     .then((json:Product[])=>this.productData.next(json.map(i=>{
       return {
         id:i.id,
-        category:i.category.name,
-        name:i.name,
+        name:i.name ,
+        thumbnail:i.thumbnail,
         price:i.price,
-        stock:i.productItemsList.length >0?"In Stock":"Out of Stock",
-        thumbnail:i.thumbnail
+        category:i.category.name,
+        state:i.state
       }
     })))
+  }
+
+  post(endpoint:String,data:any){
+    return fetch('http://localhost:8080/'+endpoint,{
+      method:'POST',
+      body:JSON.stringify(data),
+      headers:{
+        "Content-Type":"application/json; charset=utf8"
+      }
+    });
+  }
+
+  addProduct(product:any){
+    this.post('products',product)
+    .then(res=>console.log(res))
   }
 }

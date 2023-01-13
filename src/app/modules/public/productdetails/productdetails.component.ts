@@ -5,7 +5,6 @@ import { Product, ProductState } from 'src/app/models/Product';
 import { FavoriteService } from '../services/favorite.service';
 import { CartService } from '../services/cart.service';
 import { BehaviorSubject } from 'rxjs';
-import { Cart } from 'src/app/models/Cart';
 
 @Component({
   selector: 'app-productdetails',
@@ -13,8 +12,10 @@ import { Cart } from 'src/app/models/Cart';
   styleUrls: ['./productdetails.component.scss']
 })
 export class ProductdetailsComponent implements OnInit {
-  public loading = new BehaviorSubject<Boolean>(true);
-  public product !:Product;
+  public loading = true;
+  public product :Product={} as Product;
+  public images: String[]=[];
+  public selectedImage=0;
   public Math=Math;
   public _inFavorite =false
   public _inCart =false
@@ -28,21 +29,22 @@ export class ProductdetailsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.cartService.init()
-    const id = this.route.snapshot.paramMap.get('id')!;
-    this.loading.next(true)
-    this.catalogService.getProductById(id).then(p=>{this.loading.next(false);this.product = p})
-    this.favoriteService.products.subscribe(ps=>{this._inFavorite=this.inFavorite() })
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!);
+    // this.catalogService.getProductById(id).then(p=>{this.loading.next(false);this.product = p;this.outProduct=p;this.setImages()})
+    this.product = await this.catalogService.getById(id);
+    this.loading = false;
+    this.favoriteService.products.subscribe(ps=>{if(ps.length>0)this._inFavorite=this.inFavorite() })
     this.cartService.cart.subscribe(ps=>{
-      if (ps!={}as Cart){
-        console.log(ps);
-        console.log(ps.cartItems.map(ci=>ci.product.id.toString()).includes(id));
-        this._inCart=ps.cartItems.map(ci=>ci.product.id.toString()).includes(id)
-        this.quantity=ps.cartItems.filter(i=>i.product.id==this.product.id)[0].quantity;
+      if (ps != undefined){
+        this._inCart=ps?.map(ci=>ci.product.id).includes(id)
+        this.quantity=ps?.filter(i=>i.product.id==this.product.id)[0]?.quantity;
       }
     })
   }
-
+  setImages(){
+    this.images.push(this.product.thumbnail)
+    this.product.images.forEach(i=>this.images.push(i.url))
+  }
 
   AddToFavorite(){
     this.favoriteService.addToFavorite(this.product);
@@ -54,11 +56,9 @@ export class ProductdetailsComponent implements OnInit {
     return this.favoriteService.inFavorite(this.product.id);
   }
   addToCart(){
-    this.cartService.addToCart(this.product);
+    this.cartService.addProductToCart(this.product);
   }
-  isInCart(){
-    return this.cartService.isInCart(this.product.id);
-  }
+
   retrieveFromCart(){
     // this.cartService.removeFromCart(this.product.id);
   }

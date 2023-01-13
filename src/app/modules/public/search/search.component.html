@@ -1,0 +1,31 @@
+<div style="position: relative;">
+    <div class="input-container">
+        <div (click)="search()">
+            <span class="material-icons search">
+                search
+            </span>
+        </div>
+        <input
+        aria-label="State"
+        [(ngModel)]="searchItem"  (ngModelChange)="changeSearchItem()"
+        placeholder="search Product,Category,Mark ..."
+        />
+        <div (click)="resetsearchItem()">
+        <span class="material-icons close" *ngIf="searchItem!=''">
+            close
+        </span>
+        </div>
+    </div>
+    <div *ngIf="true" class="bg-white options">
+        <mat-option *ngFor="let prod of data" [value]="prod.name" style="padding: 10px;">
+            <img alt="" class="example-option-img" [src]="prod.thumbnail" height="50" style="margin: 10px;">
+            <span class="font-md">{{prod.name}}</span> |
+            <small class="font-md">Price: {{prod.price}}£</small>
+        </mat-option>
+    </div>
+
+</div>
+
+
+
+

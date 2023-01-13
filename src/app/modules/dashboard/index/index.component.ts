@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sideItem,sideSubItem } from 'src/app/components/side-item/side-item.component';
+import { ConfigService } from '../services/config.service';
 
 // 
 
@@ -60,10 +61,12 @@ export class HomeComponent implements OnInit {
   ];
   constructor(
     private router : Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private config:ConfigService
   ) { }
 
   ngOnInit(): void {
+    this.config.init();
   }
 
 }

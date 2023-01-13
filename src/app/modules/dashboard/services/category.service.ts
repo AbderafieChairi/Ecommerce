@@ -10,21 +10,45 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CategoryService {
   public categoryList=new BehaviorSubject<categoryData[]>([]);
-  constructor() { }
+  public categories=new BehaviorSubject<category[]>([]);
+  constructor() { 
+  }
 
 
 
   getAll(){
-    fetch("http://10.72.128.43:8080/category")
+    fetch("http://localhost:8080/category")
     .then(res=>res.json())
     .then(json=>{console.log(json);return json})
-    .then((json:category[])=>this.categoryList.next(json.map(i=>{
+    .then((json:category[])=>{this.categoryList.next(json.map(i=>{
       return {
         id:i.id,
         name:i.name,
         products:5,
         visibility:i.visibility
       }
-    })))
+    }));
+    this.categories.next(json)
+  })
   }
+  init(){
+    this.getAll()
+  }
+  post(endpoint:String,data:any){
+    return fetch('http://localhost:8080/'+endpoint,{
+      method:'POST',
+      body:JSON.stringify(data),
+      headers:{
+        "Content-Type":"application/json; charset=utf8"
+      }
+    });
+  }
+
+  addCategory(category:any){
+    this.post('category',category)
+    .then(res=>console.log(res))
+  }
+
+
+
 }
