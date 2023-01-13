@@ -30,6 +30,11 @@
       <app-search></app-search>
     </span>
     <div class="icon">
+      <a routerLink="/store/profile" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;">
+        <mat-icon matBadge="{{nbrFav}}" matBadgeColor="warn" style="font-size: 30px;color: rgb(0, 0, 0);">account_circle</mat-icon>    
+      </a>      
+    </div>
+    <div class="icon">
       <a routerLink="/store/favorite" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;">
         <mat-icon matBadge="{{nbrFav}}" matBadgeColor="warn" style="font-size: 30px;color: rgb(0, 0, 0);">favorite_border</mat-icon>    
       </a>      
