@@ -27,6 +27,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ProfileComponent } from './profile/profile.component';
 import { TableModule } from 'src/app/components/table/table.module';
 import { HttpClientModule } from '@angular/common/http';
+import { OrderComponent } from './order/order.component';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     SearchComponent,
     CheckoutComponent,
     ProfileComponent,
+    OrderComponent,
   ],
   imports: [
     CommonModule,

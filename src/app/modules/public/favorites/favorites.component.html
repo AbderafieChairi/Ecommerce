@@ -1,15 +1,8 @@
+<div class="p-5">
+    <div class="font-xl"><b>My Favorites</b></div>
 
 
-
-<div class="cart-products">
-    <div class="cart">Favorite ({{products.length}})</div>
-    <div class="hr"></div>
-    <div class="list">
-        <div *ngFor="let item of products">
-            <app-simple-product [product]="item"></app-simple-product>
-        </div>
+    <div *ngFor="let item of products" class="row g-3 jst-center">
+        <app-simple-product [product]="item" [defaultView]='true'></app-simple-product>
     </div>
 </div>
-
-
-<app-checkout></app-checkout>

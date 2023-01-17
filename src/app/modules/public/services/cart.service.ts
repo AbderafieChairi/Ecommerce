@@ -15,7 +15,9 @@ export class CartService {
       this.price.next(this.countTotalPrice());
     })
   }
-
+  resetCart(){
+    this.cart.next([]);
+  }
 
   init(){
     console.log("init ....")

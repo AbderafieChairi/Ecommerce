@@ -13,17 +13,27 @@
         <div class="font-md m-2"><b>Last Order</b></div>
         <div class="font-md m-2"><b>Average Order Value</b></div>
         <div class="font-md m-2"><b>Registered At</b></div>
-        <div class="text-gray txt font-md">{{user.createdAt}}</div>
+        <div class="text-gray txt font-md">{{user.createdAt |date}}</div>
         <div class="font-md m-2"><b>Activated Email</b></div>
         <div class="text-gray txt font-md">{{user.active?"Active":"Not Yet"}}</div>
         </div>
-        <div class="flex card bg-white">
-            <!-- <app-table
-                [listData]="productList"
+        <div class="flex">
+            <div class="m-2 font-lg txt"><b>My Orders</b></div>
+            <app-table
+                [showSearch]="false"
+                [listData]="orders"
                 (list)="setTableData($event)"
                 [displayedColumns]="displayedColumns"
                 >
-                </app-table> -->
+                <tr *ngFor="let row of tableData" class="font-md p-5 full-width">
+                    <td><input type="checkbox" [(ngModel)]="row.sel" /></td>
+                    <td><div (click)="toOrder(row.id)" class="touchable myA font-md">#{{row.id}}</div></td>
+                    <td><div class="font-md">{{row.total | currency}}</div></td>
+                    <td><div class="font-md">{{row.items}}</div></td>
+                    <td><div class="font-md">Completed</div></td>
+                    <td><div class="font-md">{{row.createdAt |date}}</div></td>
+                  </tr>
+                </app-table>
         </div>
     </div>
 </div>

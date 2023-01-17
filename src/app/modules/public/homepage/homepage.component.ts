@@ -5,6 +5,7 @@ import { category } from 'src/app/models/Category';
 import { CategoryService } from '../services/category.service';
 import {BehaviorSubject} from 'rxjs'
 import { Options } from "@angular-slider/ngx-slider";
+import { ActivatedRoute, Router } from '@angular/router';
 enum filter_by{
   new_Product='New Products',
   most_requested='most requested',
@@ -33,6 +34,7 @@ export class HomepageComponent implements OnInit {
     // showTicks: true
   };
   maxDiscount=0;
+  category='Products';
   discountOptions: Options = {
     ceil: 100,
     step:5,
@@ -44,7 +46,12 @@ export class HomepageComponent implements OnInit {
   };
   categories : category[]=[];
   discount:number = 0;
-  constructor(private catalogService:CatalogService,private categoryService : CategoryService) { }
+  constructor(
+    private catalogService:CatalogService,
+    private categoryService : CategoryService,
+    private route:ActivatedRoute,
+    private router:Router
+    ) { }
   public f=filter_by;
   public filterBy:string=filter_by.new_Product;
   GridView:boolean=true;
@@ -52,12 +59,17 @@ export class HomepageComponent implements OnInit {
   setFilterBy(f:string){
     this.filterBy=f;
     this.sortedProduct.next(this.catalogService.sortProducts(this.products,f));
-    console.log("set sort by")
   }
   setGridView(gv:boolean){
     this.GridView=gv;
   }
   async ngOnInit(): Promise<void> {
+    this.route.queryParams.subscribe(params=>{
+      if('category' in params){
+        this.category=params['category']
+        this.filterBycategory(params['category'])
+      }
+    })
     this.products =await this.catalogService.getAll();
     this.sortedProduct.next(this.products)
     this.sortedProduct.subscribe(sp=>{
@@ -67,5 +79,15 @@ export class HomepageComponent implements OnInit {
 
   }
   next(){
+  }
+  toCategory(category:String){
+    this.router.navigate([],{
+      relativeTo:this.route,
+      queryParams:{category}
+    })
+  }
+  filterBycategory(category:string){
+    this.catalogService.filterByCategory(category)
+    .then(res=>this.filteredProduct=res);
   }
 }

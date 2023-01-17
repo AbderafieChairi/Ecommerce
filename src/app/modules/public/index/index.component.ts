@@ -31,7 +31,7 @@ export class IndexComponent implements OnInit {
     await this.config.init();
 
     this.cartService.cart.subscribe(ps=>this.nbr=ps!= undefined ? ps.length:0);
-    // this.favoriteService.products.subscribe(ps=>this.nbrFav=ps.length);
+    this.favoriteService.products.subscribe(ps=>this.nbrFav=ps.length);
   }
   toHome=()=>this.router.navigate(['store','home'])
   researchByName=()=>this.catalogService.filtertByName();

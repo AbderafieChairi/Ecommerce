@@ -8,6 +8,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
     {path:'',component:IndexComponent,children:[
@@ -16,6 +17,7 @@ const routes: Routes = [
         // {path:'filter',component:ProductFilterComponent},
         {path:'favorite',component:FavoritesComponent},
         {path:'checkout',component:CheckoutComponent},
+        {path:'order',component:OrderComponent},
         {path:'profile',component:ProfileComponent},
         {path:'product/:id',component:ProductdetailsComponent},
         

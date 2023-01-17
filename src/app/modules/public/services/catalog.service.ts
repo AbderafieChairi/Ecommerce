@@ -143,10 +143,10 @@ export class CatalogService {
     });
   }
 
-  filterByCategory(products: Product[], category: string) {
-    return products.filter(product => {
-      return product.category.name.includes(category);
-    });
+  async filterByCategory(category: string) {
+      return fetch("http://localhost:8080/products/category/"+category)
+      .then(res=>res.json())
+      .then((json:Product[])=>json);
   }
 
   filterByTag(products: Product[], tag: Tag) {
@@ -155,7 +155,7 @@ export class CatalogService {
     });
   }
   async filterByName(name:string) {
-    if(name="") return [];
+    if(name=="") return [];
     return fetch("http://localhost:8080/products/search/"+name)
     .then(res=>res.json())
     .then(json=>{console.log(json);return json})

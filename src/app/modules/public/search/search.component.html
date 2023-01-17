@@ -17,7 +17,9 @@
         </div>
     </div>
     <div *ngIf="true" class="bg-white options">
-        <mat-option *ngFor="let prod of data" [value]="prod.name" style="padding: 10px;">
+        <mat-option *ngFor="let prod of data" [value]="prod.name" style="padding: 10px;"
+            (click)="toProduct(prod.id)"
+        >
             <img alt="" class="example-option-img" [src]="prod.thumbnail" height="50" style="margin: 10px;">
             <span class="font-md">{{prod.name}}</span> |
             <small class="font-md">Price: {{prod.price}}£</small>

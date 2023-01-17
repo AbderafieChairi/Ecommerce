@@ -38,6 +38,7 @@ export class TableComponent implements OnInit {
       this.Init();
     }
  } 
+ @Input() showSearch :boolean =true;
  get listData():any[]{
     return this._listData;
  }

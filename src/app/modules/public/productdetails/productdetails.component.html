@@ -1,35 +1,44 @@
 <div *ngIf="!loading">
-    <div class="card m-3">
+    <div class="m-3">
         <div class="row  display-f al-center" style="position: relative;">
             <div class="img">
                 <img [src]='product.thumbnail' height="270" width="270"/>
             </div>
-            <div class="column al-left flex">
+            <div class="ml-2 flex">
                 <div class="product-icon">
                 </div>
-                <div class="fav" (click)="AddToFavorite()" *ngIf="!_inFavorite"><span class="material-icons-outlined favorite_border">favorite_border</span></div>
-                <div class="fav" (click)="removeFromFavorite()" *ngIf="_inFavorite"><span class="material-icons-outlined favorite">favorite</span></div>
+                
                 <div class="product-vars">
-                    <div class="font-lg text-primary m-1 ml-2">{{product.name}}</div>
-                    <div class="font-md text-secondary m-1 ml-2">category : {{product.category.name}}</div>
-                    <div class="font-md text-secondary m-1 ml-2">last Modification : {{product.modifiedAt}}</div>
-                    <div class="mt-2 mb-2">
-                        <app-rating [rating]="3"></app-rating>
+                    <div class="font-lg text-black m-2">{{product.name}}</div>
+                    <div class="row al-center">
+                        <app-rating [display]="true" [rating]="3"></app-rating>
+                        <div class="font-md">(103) reviews</div>
                     </div>
-                    <div class="font-md l-thr text-gray m-1 ml-2">{{product.price}}£</div>
-                    <div class="font-md text-primary m-1 ml-2">{{product.price}}£</div>  
+                    <div class="row al-center">
+                        <div class="font-md l-thr text-gray m-2 mb-0">{{product.price | number}}£ |</div>
+                        <div class="font-lg text-primary m-2 ml-0 mb-0">{{product.price*(1-product.discount.value/100) | number}}£</div>  
+                    </div>
+                    <div class="font-md m-2 row al-center g-2">
+                        <b>Category : </b>
+                        <div class="btn-outlined-primary" (click)="toCategory(product.category.name)">{{product.category.name}}</div>
+                    </div>
+                    <div class="font-md m-2"><b>Last Modification : </b>{{product.modifiedAt | date}}</div>
+                    <div class="font-md m-2"><b>Short Description: </b> {{product.shortdetails}} </div>
+
                         
                 </div>
-                <div class="flex column jst-end al-center" style="height: 100%;">
-                    <div class="btn-primary row gap-1" style="width: 80%;" (click)="addToCart()" *ngIf="!_inCart">
+                <div class="flex row jst-center al-center g-2" style="height: 100%;width: 80%; margin: 0px auto;">
+                    <div class="btn-primary row p-2 flex"  (click)="addToCart()" *ngIf="!_inCart">
                         <span class="material-icons">
                             add_shopping_cart
                             </span>
                         <div class="flex txt font-md">Add to Cart</div>
                     </div>
-                    <div *ngIf="_inCart">
+                    <div *ngIf="_inCart" class="flex center">
                         <div class="txt font-md text-primary p-1">Product in Cart</div>
                     </div>
+                    <div class="btn-primary" (click)="AddToFavorite()" *ngIf="!_inFavorite"><span class="material-icons-outlined ">favorite_border</span></div>
+                    <div class="btn-primary" (click)="removeFromFavorite()" *ngIf="_inFavorite"><span class="material-icons-outlined ">favorite</span></div>
                 </div>
             </div>
         </div>
@@ -39,9 +48,9 @@
     </div>
     
     
-    <div class="card m-3" >
+    <div class="m-3" >
         <div class="font-lg text-primary m-3">Details</div>
-        <p class="font-md m-2">{{product.shortdetails}}</p>
+        
         
         <p class="font-md m-2">{{product.details}}</p>
     </div>

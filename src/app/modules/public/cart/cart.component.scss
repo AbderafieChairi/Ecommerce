@@ -55,6 +55,8 @@ table {
     flex-direction: row;
     width: 80%;
     align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 10px auto;
 }
 .discount{
     flex:1;

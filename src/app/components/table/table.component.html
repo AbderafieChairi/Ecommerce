@@ -4,7 +4,7 @@
 
 
 <div class="m-5 p-0 bg-white card">
-    <div class="p-2">
+    <div class="p-2" *ngIf="showSearch">
         <input type="text" class="full-width search"        [ngModel]="searchedItem | async"
         (ngModelChange)="searchedItem.next($event)" 
         placeholder="Search ....."

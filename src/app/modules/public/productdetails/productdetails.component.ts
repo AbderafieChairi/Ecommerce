@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogService } from '../services/catalog.service';
 import { Product, ProductState } from 'src/app/models/Product';
 import { FavoriteService } from '../services/favorite.service';
@@ -25,7 +25,8 @@ export class ProductdetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private catalogService :CatalogService,
     private favoriteService:FavoriteService,
-    private cartService :CartService
+    private cartService :CartService,
+    private router:Router
   ) { }
 
   async ngOnInit() {
@@ -33,7 +34,7 @@ export class ProductdetailsComponent implements OnInit {
     // this.catalogService.getProductById(id).then(p=>{this.loading.next(false);this.product = p;this.outProduct=p;this.setImages()})
     this.product = await this.catalogService.getById(id);
     this.loading = false;
-    this.favoriteService.products.subscribe(ps=>{if(ps.length>0)this._inFavorite=this.inFavorite() })
+    this.favoriteService.products.subscribe(ps=>{this._inFavorite=this.inFavorite() })
     this.cartService.cart.subscribe(ps=>{
       if (ps != undefined){
         this._inCart=ps?.map(ci=>ci.product.id).includes(id)
@@ -62,5 +63,9 @@ export class ProductdetailsComponent implements OnInit {
   retrieveFromCart(){
     // this.cartService.removeFromCart(this.product.id);
   }
-
+  toCategory(category:String){
+    this.router.navigate(["store","home"],{
+      queryParams:{category}
+    })
+  }
 }

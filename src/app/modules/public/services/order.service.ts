@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Order } from 'src/app/models/Order';
+import { Order, OrderData, OrderDetail } from 'src/app/models/Order';
 import { OrderItem } from 'src/app/models/OrderItem';
 import { AuthService } from 'src/app/service/auth.service';
 import { CartService } from './cart.service';
@@ -57,6 +57,7 @@ export class OrderService {
         this.order.next(order);
         console.log(order)
         this.post("order/"+user.id.toString(),order)
+        this.cartService.resetCart();
         return Status.seccus        
       } catch (error) {
         return Status.error;
@@ -87,21 +88,19 @@ export class OrderService {
     console.log('http://localhost:8080/'+endpoint)
     return fetch('http://localhost:8080/'+endpoint,{method:'DELETE'})
   }
- 
-
-  async quitCheckOut(){
-    localStorage.removeItem("order_id");
-  }
 
 
   async getOrderbyUser(){
     const user = JSON.parse(localStorage.getItem("user")||"");
     return this.get("order/user/"+user.id)
     .then(res=>res.json())
-    .then((json:Order[])=>json)
-
+    .then((json:OrderData[])=>json)
   }
-
+  async getOrderbyId(id:number){
+    return this.get("order/"+id)
+    .then(res=>res.json())
+    .then((json:OrderDetail)=>json)
+  }
 
 
   testToken(token:string){

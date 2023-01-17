@@ -4,7 +4,12 @@
             <div class="br-gray p-3 m-5 card bg-white" style="min-width: 400px;">
                 <div class="font-lg m-2">CATEGORIES</div>
                 <div class="ml-3">
-                    <div *ngFor="let caterogy of categories" class="font-md text-gray touchable p-1 text-hover-gray-dark-5" style="width: 80%;">
+                    <div 
+                    *ngFor="let caterogy of categories" 
+                    class="font-md text-gray touchable p-1 text-hover-gray-dark-5" 
+                    style="width: 80%;"
+                    (click)="toCategory(caterogy.name)"
+                    >
                         {{caterogy.name}}
                     </div>
                 </div>
@@ -42,7 +47,7 @@
             <div class="flex ">
                 <div class="product_catgery card bg-white">
                   <div  class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
-                    <div class="font-lg text-primary">Products</div>
+                    <div class="font-lg text-primary">{{category}}</div>
                     <div class="Fiter_by">
                       <button mat-button [matMenuTriggerFor]="menu" class="font-md">Sort by: {{filterBy}} 
                         <span class="material-icons p-2 font-lg">expand_more</span>
@@ -55,7 +60,7 @@
                     </div>
                   </div>
                   <div class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
-                    <div class="font-md">80 results</div>
+                    <div class="font-md">{{filteredProduct.length | number}} results</div>
                     <div class="row">
                       <div class="touchable" (click)="setGridView(false)">
                         <span class="material-icons apperence font-xl" [ngStyle]="{color:GridView?'#333':'orange'}">view_list</span>

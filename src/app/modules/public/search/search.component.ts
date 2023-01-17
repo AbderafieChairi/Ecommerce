@@ -51,5 +51,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
+  toProduct(id:number){
+    this.resetsearchItem()
+    this.router.navigate(["store","product",id])
+  }
 }

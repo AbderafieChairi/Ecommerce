@@ -13,14 +13,12 @@
 </div>
 
 
-<div class="container" *ngIf="display==true">
+<div class="pl-1 pr-1" *ngIf="display==true">
     <div class="rating" >
         <div *ngFor="let item of rates">
             <span class="material-icons" >
                 {{item < rating?'star':'star_border'}}
             </span>
         </div>
-        <div class="rate" style="font-size: 18px;position: relative;top: -2px;">{{rating}}</div>
-
     </div>  
 </div>

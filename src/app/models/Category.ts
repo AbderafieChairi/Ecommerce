@@ -16,11 +16,9 @@ export interface categoryData{
     id: number,
     name: string,
     products: number,
-    visibility: string,
 }
 
 export const CategoryDataTitle:any={
     name: "Category",
     products:"Products",
-    visibility:"Visibility" 
 }
