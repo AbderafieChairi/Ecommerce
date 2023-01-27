@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Product, ProductData } from 'src/app/models/Product';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   productData = new BehaviorSubject<ProductData[]>([]);
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
 
 
@@ -25,6 +26,12 @@ export class ProductService {
         state:i.state
       }
     })))
+  }
+
+  getTotalSells():Observable<number>{
+    console.log("hehooo")
+    return this.http.get<number>("http://localhost:8080/order/totalSells");
+   
   }
 
   post(endpoint:String,data:any){

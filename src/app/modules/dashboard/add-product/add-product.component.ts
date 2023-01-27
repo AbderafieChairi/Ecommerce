@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {FormArray, FormControl, FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import { ProductService } from '../services/product.service';
 import { CategoryService } from '../services/category.service';
 import { category } from 'src/app/models/Category';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  styleUrls: ['./add-product.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddProductComponent implements OnInit {
   addProductForm !: FormGroup;
   constructor(
     private fb:FormBuilder,
     private ps:ProductService,
-    private cs: CategoryService
+    private cs: CategoryService,
+    private snackBar: MatSnackBar
   ){}
 
 
@@ -55,6 +58,10 @@ export class AddProductComponent implements OnInit {
   submit(){
     console.log(this.addProductForm.value);
     this.ps.addProduct(this.addProductForm.value);
+    this.snackBar.open('Success!', 'Dismiss', {
+      duration: 3000,
+      panelClass: ['success-snackbar']
+    });
   }
 
   setTagsError(event:Boolean){

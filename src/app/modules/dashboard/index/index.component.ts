@@ -53,8 +53,8 @@ export class HomeComponent implements OnInit {
       title:"Orders",
       subItems:[
         {
-          title:'hhhh',
-          action:()=>{}
+          title:'listOrders',
+          action:()=>{this.router.navigate(["orders"],{relativeTo: this.route})}
         }
       ]
     },

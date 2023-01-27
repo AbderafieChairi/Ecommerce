@@ -12,8 +12,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  order :Order = JSON.parse(localStorage.getItem("order") ||"");
-  products :CartItem[]= JSON.parse(localStorage.getItem("cart") ||"");
+  order :Order = JSON.parse(localStorage.getItem("order") ||"{}");
+  products :CartItem[]= JSON.parse(localStorage.getItem("cart") ||"{}Ò");
   // checkoutForm: FormGroup;
   seccus=new BehaviorSubject<boolean>(true);
   token:String="";

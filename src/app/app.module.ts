@@ -12,6 +12,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './components/chat/chat.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ChatComponent } from './components/chat/chat.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

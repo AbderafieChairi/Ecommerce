@@ -16,7 +16,6 @@ import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { SideItemComponent } from 'src/app/components/side-item/side-item.component';
 import { MultipleChoiceComponent } from 'src/app/components/multiple-choice/multiple-choice.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -26,6 +25,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { UploadComponent } from 'src/app/components/upload/upload.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { TableModule } from 'src/app/components/table/table.module';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -39,6 +39,7 @@ import { TableModule } from 'src/app/components/table/table.module';
     MultipleChoiceComponent,
     AdvChoiceComponent,
     UploadComponent,
+    
 
     
   ],

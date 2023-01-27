@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OrderDetail } from 'src/app/models/Order';
+import { OrderService } from '../../public/services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+  orders !:OrderDetail[];
+  constructor(
+    private orderService:OrderService,
+    private route:ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+      this.orders=[]
+        this.orderService.getOrders()
+        .then(res=>this.orders.push(res))
+      
   }
 
 }

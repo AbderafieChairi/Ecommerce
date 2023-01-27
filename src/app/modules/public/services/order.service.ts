@@ -102,6 +102,12 @@ export class OrderService {
     .then((json:OrderDetail)=>json)
   }
 
+  async getOrders(){
+    return this.get("order")
+    .then(res=>res.json())
+    .then((json:OrderDetail)=>json)
+  }
+
 
   testToken(token:string){
     try {
