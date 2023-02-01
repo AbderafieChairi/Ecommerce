@@ -7,12 +7,19 @@ import { Product } from 'src/app/models/Product';
   providedIn: 'root'
 })
 export class CartService {
-  cart = new BehaviorSubject<CartItem[]>([]);
+  cart = new BehaviorSubject<CartItem[]>(this.cartStorage);
   price = new BehaviorSubject<number>(0);
-
+  get cartStorage(){
+    const cart_st = localStorage.getItem("cart");
+    return cart_st!=null ? JSON.parse(cart_st):[];
+  }
+  set cartStorage(cart:any){
+    localStorage.setItem("cart",JSON.stringify(cart));
+  }
   constructor(){
     this.cart.subscribe(ca=>{
       this.price.next(this.countTotalPrice());
+      this.cartStorage=ca;
     })
   }
   resetCart(){
@@ -20,14 +27,6 @@ export class CartService {
   }
 
   init(){
-    console.log("init ....")
-    const cart_st = localStorage.getItem("cart")
-    if (cart_st==null){
-      console.log("create Cart")
-      localStorage.setItem("cart",JSON.stringify([]));
-    }else{
-      this.cart.next(JSON.parse(cart_st))
-    }
   }
   submit(){
     localStorage.setItem("cart",JSON.stringify(this.cart.value))
@@ -39,10 +38,9 @@ export class CartService {
     if (cartItem) {
       cartItem.quantity++;
     } else {
-      cartItems.push({ product: product, quantity: 1 });
+      cartItems.push({ product: product, quantity: 1,hasReduce:false });
     }
     this.cart.next(cartItems);
-    this.submit()
   }
 
   addQuantity(productId: number) {
@@ -52,7 +50,6 @@ export class CartService {
       cartItem.quantity++;
       this.cart.next(cartItems);
     }
-    this.submit()
   }
 
   reduceQuantity(productId: number) {
@@ -66,14 +63,12 @@ export class CartService {
         this.cart.next(cartItems);
       }
     }
-    this.submit()
   }
 
   removeProductFromCart(productId: number) {
     let cartItems = this.cart.value;
     let updatedCartItems = cartItems.filter(x => x.product.id != productId);
     this.cart.next(updatedCartItems);
-    this.submit()
   }
 
   countTotalPrice() {
@@ -83,5 +78,18 @@ export class CartService {
       total += x.quantity * x.product.price;
     });
     return total;
+  }
+
+
+  checkPromoCode(promocode : string){
+    const c = this.cart.value;
+    c.forEach(cartitem=>{
+      if (cartitem.product.promoCodes.some(pcode=>pcode.value==promocode&&cartitem.hasReduce==false)){
+        cartitem.hasReduce = true;
+        cartitem.product.price = cartitem.product.price*0.9;
+      }
+    })
+    this.cart.next(c)
+    this.price.next(this.countTotalPrice());
   }
 }

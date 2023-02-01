@@ -1,71 +1,9 @@
-<!-- <div class="row full-width">
-    <div class="center column g-3">
-        <table style="min-width: 700px;margin: 30px;">
-            <tr>
-              <th></th>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-            <tr *ngIf="products?.length==0">
-                <td [colSpan]="5" class="empty">
-                    Cart list empty
-                </td>
-            </tr>
-            <tr *ngFor="let item of products">
-                <td class="img">
-                    <img [src]='item.product.thumbnail' height="150" width="150"/>
-                </td>
-                <td >
-                    <div class="title">{{item.product.name}}</div>
-                </td>
-                <td >
-                        <div class="font-md" >{{item.quantity}}</div>
-                </td>
-
-                <td class="details">
-                    <div class="cost">{{item.product.price}}£</div>
-                </td>
-            </tr>
-        </table>
-        <div class="full-width p-2 font-md text-black row jst-center">
-            User : {{order.user.name+" - "}} <div style="text-decoration: underline;" class="text-primary touchable"
-            (click)="quit()"
-            > <b>cancel Checkout</b></div>
-        </div>
-        <div class="font-lg text-primary" style="font-weight: bold;">
-            Total : {{order.total}}£
-        </div>
-    </div>
-    <div class="flex p-5 center">
-        <div style="width: 500px;">
-            <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="card bg-white m-5 p-5">
-                <div class="txt p-2 text-primary font-lg">Shipping Informations</div>
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" formControlName="fullName">
-                <label for="email">Email</label>
-                <input type="email" id="email" formControlName="email">
-                <label for="address">Address</label>
-                <input type="text" id="address" formControlName="address">
-                <label for="city">City</label>
-                <input type="text" id="city" formControlName="city">
-                <label for="country">Country</label>
-                <input type="text" id="country" formControlName="country">
-                <label for="zip">Zip Code</label>
-                <input type="text" id="zip" formControlName="zip">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" formControlName="phone">
-                <button type="submit" class="btn-primary full-width mt-3 font-md">Submit</button>
-              </form>
-        </div>
-
-    </div>
-</div> -->
 
 
-<div *ngIf="seccus.value" class="txt p-4">
+<div *ngIf="seccus.value" class="txt p-4 display-f">
     <h1>  We appreciate your business! If you have any questions, please email
         <a href="mailto:orders@example.com">orders@example.com</a>.</h1>
+        <div class="btn-primary font-md"  (click)="toHome()">continue Shopping</div>
 </div>
 
 

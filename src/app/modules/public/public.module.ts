@@ -28,6 +28,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { TableModule } from 'src/app/components/table/table.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderComponent } from './order/order.component';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { PricePipe } from './pipes/price.pipe';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -42,6 +44,8 @@ import { OrderComponent } from './order/order.component';
     CheckoutComponent,
     ProfileComponent,
     OrderComponent,
+    DiscountPipe,
+    PricePipe,
   ],
   imports: [
     CommonModule,

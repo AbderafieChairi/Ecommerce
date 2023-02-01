@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sideItem,sideSubItem } from 'src/app/components/side-item/side-item.component';
 import { ConfigService } from '../services/config.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 // 
 
@@ -17,12 +18,7 @@ export class HomeComponent implements OnInit {
       icon:"space_dashboard",
       action:()=>{this.router.navigate(["dashboard"],{relativeTo: this.route})},
       title:"Dashboard",
-      subItems:[
-        {
-          title:'hhhh',
-          action:()=>{console.log("hhhh")}
-        }
-      ]
+      subItems:[]
     },
     {
       icon:"grid_view",
@@ -62,11 +58,15 @@ export class HomeComponent implements OnInit {
   constructor(
     private router : Router,
     private route:ActivatedRoute,
-    private config:ConfigService
+    private config:ConfigService,
+    private auth:AuthService
   ) { }
 
   ngOnInit(): void {
     this.config.init();
+  }
+  logout(){
+    this.auth.logout()
   }
 
 }

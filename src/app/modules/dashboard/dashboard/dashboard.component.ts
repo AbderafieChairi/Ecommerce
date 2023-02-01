@@ -40,43 +40,59 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
       this.orders=[]
+      function getMonth_(order :OrderDetail) : Number{
+        const  aa : Number = parseInt(order.createdAt.toString().split(",")[1]);
+        return aa
+      }
+
         this.orderService.getOrders()
-        .then(res=>this.orders.push(res));
+        .then(orders=>{
+
+          this.orders=orders;
+
+          f();
+        });
       
-      this.ActualOrders=this.orders.filter(x=>x.createdAt.getMonth()==this.getCurrentMonth()?true:false);
-
-      this.previousOrders=this.orders.filter(x=>x.createdAt.getMonth()==(this.getCurrentMonth()-1)%12?true:false);
-
-      this.ActualtotalSells=this.ActualOrders.reduce((a,v)=>{return a+v.total},0);
-      this.ActualsellsAvgPrice=this.ActualtotalSells/this.ActualOrders.length;
-      this.ActualnumberOfSells=this.ActualOrders.length;
-
-      this.previoustotalSells=this.previousOrders.reduce((a,v)=>{return a+v.total},0);
-      this.previoussellsAvgPrice=this.previoustotalSells/this.previousOrders.length;
-      this.previousnumberOfSells=this.previousOrders.length;
-
-      this.vartotalSells=(this.ActualtotalSells-this.previoustotalSells)*100/this.previoustotalSells;
-      if(this.vartotalSells>=0){
-        this.var1trending="trending_up";
-        this.style1="row g-1 text-green-dark-2 font-md";
-      }
-
-      this.varsellsAvgPrice=(this.ActualsellsAvgPrice-this.previoussellsAvgPrice)*100/this.previoussellsAvgPrice;
-      if(this.varsellsAvgPrice>=0){
-        this.var2trending="trending_up";
-        this.style2="row g-1 text-green-dark-2 font-md";
-      }
-
-      this.varnumberOfSells=(this.ActualnumberOfSells-this.previousnumberOfSells)*100/this.previousnumberOfSells;
-      if(this.varnumberOfSells>=0){
-        this.var3trending="trending_up";
-        this.style3="row g-1 text-green-dark-2 font-md";
+      const f=()=>{
+        console.log(this.orders)
+        this.ActualOrders=this.orders.filter(x=>{
+          console.log(getMonth_(x),this.getCurrentMonth());
+          return getMonth_(x)==this.getCurrentMonth();
+        });
+        console.log(this.ActualOrders)
+        this.previousOrders=this.orders.filter(x=>getMonth_(x)==(this.getCurrentMonth()-1)%12);
+        console.log(this.previousOrders)
+        this.ActualtotalSells=this.ActualOrders.reduce((a,v)=>{return a+v.total},0);
+        this.ActualsellsAvgPrice=this.ActualtotalSells/this.ActualOrders.length;
+        this.ActualnumberOfSells=this.ActualOrders.length;
+  
+        this.previoustotalSells=this.previousOrders.reduce((a,v)=>{return a+v.total},0);
+        this.previoussellsAvgPrice=this.previoustotalSells/this.previousOrders.length;
+        this.previousnumberOfSells=this.previousOrders.length;
+  
+        this.vartotalSells=(this.ActualtotalSells-this.previoustotalSells)/this.previoustotalSells;
+        if(this.vartotalSells>=0){
+          this.var1trending="trending_up";
+          this.style1="row g-1 text-green-dark-2 font-md";
+        }
+  
+        this.varsellsAvgPrice=(this.ActualsellsAvgPrice-this.previoussellsAvgPrice)/this.previoussellsAvgPrice;
+        if(this.varsellsAvgPrice>=0){
+          this.var2trending="trending_up";
+          this.style2="row g-1 text-green-dark-2 font-md";
+        }
+  
+        this.varnumberOfSells=(this.ActualnumberOfSells-this.previousnumberOfSells)/this.previousnumberOfSells;
+        if(this.varnumberOfSells>=0){
+          this.var3trending="trending_up";
+          this.style3="row g-1 text-green-dark-2 font-md";
+        }
       }
       
   }
 
   getCurrentMonth() {
-    return new Date().getMonth();
+    return new Date().getMonth()+1;
   }
 
   // constructor(private productService:ProductService) { }
@@ -87,3 +103,7 @@ export class DashboardComponent implements OnInit {
   // }
 
 }
+function getMonth_(order: any, OrderDetail: any) {
+  throw new Error('Function not implemented.');
+}
+

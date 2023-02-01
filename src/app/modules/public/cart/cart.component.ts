@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
     private router : Router,
     private orderService : OrderService
   ) { }
-
+  promocode:string='';
   ngOnInit(): void {
     this.cartService.init();
     this.cartService.cart.subscribe(p=>{
@@ -39,5 +39,11 @@ export class CartComponent implements OnInit {
     // }else if(result == Status.seccus){
     //   this.router.navigate(['store','checkout'])
     // }
+  }
+
+  checkPromoCode(){
+    console.log("check prmo code");
+    this.cartService.checkPromoCode(this.promocode);
+    this.promocode='';
   }
 }

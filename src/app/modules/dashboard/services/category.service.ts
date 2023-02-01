@@ -19,17 +19,8 @@ export class CategoryService {
   getAll(){
     fetch("http://localhost:8080/category")
     .then(res=>res.json())
-    .then(json=>{console.log(json);return json})
-    .then((json:category[])=>{this.categoryList.next(json.map(i=>{
-      return {
-        id:i.id,
-        name:i.name,
-        products:5,
-        visibility:i.visibility
-      }
-    }));
-    this.categories.next(json)
-  })
+    .then((json:category[])=>{this.categories.next(json);return json})
+    .then((json:categoryData[])=>{this.categoryList.next(json)})
   }
   init(){
     this.getAll()
@@ -48,7 +39,11 @@ export class CategoryService {
     this.post('category',category)
     .then(res=>console.log(res))
   }
+  deletecategory(id:number){
+    fetch("http://localhost:8080/category/delete/"+ id)
+    .then(res=>window.location.reload())
 
+  }
 
 
 }

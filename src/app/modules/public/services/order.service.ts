@@ -17,45 +17,43 @@ export const secret='fe1a1915a379f3be5394b64d14794932'
   providedIn: 'root'
 })
 export class OrderService {
-  order =new BehaviorSubject<Order>({} as Order)
+  order =new BehaviorSubject<Order>(this.orderStorage)
   constructor(
     private authService :AuthService,
     private cartService :CartService,
-    // private http:HttpClient
     ) {
+      this.order.subscribe(o=>this.orderStorage=o);
+  }
+  get orderStorage():Order{
+    const order_st = localStorage.getItem("order");
+    return order_st!=null ? JSON.parse(order_st):{} as Order;
+  }
+  set orderStorage(order:Order){
+    localStorage.setItem("order",JSON.stringify(order));
   }
 
 
-
   SubmitOrder():Status {
-      let userStorage = localStorage.getItem("user")
-      if(userStorage==null) {
+      let user = this.authService.getCurrentUser();
+      if(user=={} as User) {
         console.log("user not found ")
         return Status.userNotFound;
       }
       try {
-        let user : User = JSON.parse(userStorage || "");
         let cart = this.cartService.cart.value;
-        let deliveryType = "POD";
-        let deliveryPrice = 1000;
-        let subtotal = this.cartService.countTotalPrice();
-        let total = subtotal + deliveryPrice;
+        let total = this.cartService.countTotalPrice();
         let orderItems = cart.map(x=>{return {quantity: x.quantity,
           product: x.product
         } as OrderItem
         })
         let order: Order = {
           id:0,
-          subtotal: subtotal,
           total: total,
-          deliveryType: deliveryType,
-          deliveryPrice: deliveryPrice,
           orderItems: orderItems,
-          user: user
+          user: user,
+          createdAt:new Date()
         };
-        localStorage.setItem("order",JSON.stringify(order));
         this.order.next(order);
-        console.log(order)
         this.post("order/"+user.id.toString(),order)
         this.cartService.resetCart();
         return Status.seccus        
@@ -64,11 +62,9 @@ export class OrderService {
       }
   }
   getOrder(){
-    const order = localStorage.getItem("order")
-    return order ? order:{};
+    return this.orderStorage;
   }
-  async init(){
-    this.order
+  init(){
   }
 
   post(endpoint:String,data:any){
@@ -84,15 +80,9 @@ export class OrderService {
   async get(endpoint:String){
     return fetch('http://localhost:8080/'+endpoint)
   }
-  delete(endpoint:String){
-    console.log('http://localhost:8080/'+endpoint)
-    return fetch('http://localhost:8080/'+endpoint,{method:'DELETE'})
-  }
-
 
   async getOrderbyUser(){
-    const user = JSON.parse(localStorage.getItem("user")||"");
-    return this.get("order/user/"+user.id)
+    return this.get("order/user/"+this.authService.getCurrentUser().id)
     .then(res=>res.json())
     .then((json:OrderData[])=>json)
   }
@@ -105,7 +95,7 @@ export class OrderService {
   async getOrders(){
     return this.get("order")
     .then(res=>res.json())
-    .then((json:OrderDetail)=>json)
+    .then((json:OrderDetail[])=>json)
   }
 
 
@@ -123,11 +113,8 @@ export class OrderService {
 
 
   usingStripe(){
-    console.log("using Stripe")
     // var token = jwt.encode({app:'Ecommerce'}, secret);
-    let userStorage = localStorage.getItem("user")
-    if(userStorage==null) {
-      console.log("user not found ")
+    if(this.authService.getCurrentUser()=={} as User) {
       return Status.userNotFound;
     }
     try{

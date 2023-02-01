@@ -23,17 +23,14 @@ enum filter_by{
 })
 export class HomepageComponent implements OnInit {
   products : Product[] = [];
-  sortedProduct =new BehaviorSubject<Product[]>([]);
-  filteredProduct : Product[] = [];
   minPrice=0;
-  maxPrice=100;
+  maxPrice=20000;
   priceOptions: Options = {
     floor: 0,
-    ceil: 100,
+    ceil: 20000,
     step: 10,
     // showTicks: true
   };
-  maxDiscount=0;
   category='Products';
   discountOptions: Options = {
     ceil: 100,
@@ -51,14 +48,17 @@ export class HomepageComponent implements OnInit {
     private categoryService : CategoryService,
     private route:ActivatedRoute,
     private router:Router
-    ) { }
-  public f=filter_by;
+    ) {
+      this.catalogService.sortedProducts.subscribe(ps=>this.products=ps)
+     }
+  
   public filterBy:string=filter_by.new_Product;
+  f= filter_by;
   GridView:boolean=true;
   
   setFilterBy(f:string){
-    this.filterBy=f;
-    this.sortedProduct.next(this.catalogService.sortProducts(this.products,f));
+    
+    this.catalogService.sortProducts(f);
   }
   setGridView(gv:boolean){
     this.GridView=gv;
@@ -67,27 +67,23 @@ export class HomepageComponent implements OnInit {
     this.route.queryParams.subscribe(params=>{
       if('category' in params){
         this.category=params['category']
-        this.filterBycategory(params['category'])
+        this.catalogService.filterByCategory(params['category'])
+        console.log("get gategory products")
+      }else{
+        this.catalogService.getAll();
+        console.log("get all products")
       }
-    })
-    this.products =await this.catalogService.getAll();
-    this.sortedProduct.next(this.products)
-    this.sortedProduct.subscribe(sp=>{
-      this.filteredProduct=sp;
     })
     this.categories = await this.categoryService.getAll();
 
   }
-  next(){
-  }
+
   toCategory(category:String){
     this.router.navigate([],{
       relativeTo:this.route,
       queryParams:{category}
     })
   }
-  filterBycategory(category:string){
-    this.catalogService.filterByCategory(category)
-    .then(res=>this.filteredProduct=res);
-  }
+
+
 }

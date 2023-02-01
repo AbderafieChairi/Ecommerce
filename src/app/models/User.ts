@@ -7,4 +7,8 @@ export interface User{
     phone:number;
     sexe:string;
     addresse:String;
+    createdAt:Date;
+    lastOrder:Date;
+    avgorders:number;
+    rule:string;
 }

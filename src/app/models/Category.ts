@@ -4,10 +4,8 @@ import { Tag } from "./Tag";
 export interface category{
     id: number,
     name: string,
-    tags: Tag[],
-    parentCategory: category[],
-    visibility: string,
-    startAt: string
+    products:number
+    
 }
 
 

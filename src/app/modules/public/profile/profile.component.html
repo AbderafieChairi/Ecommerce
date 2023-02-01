@@ -1,21 +1,24 @@
 
 <div class="full-width">
-    <div class="font-xl m-3">
-        {{user.name}}
+    <div class=" m-3 row g-2">
+        <div class="font-xl">{{user.name}}</div>
+        <div (click)="logout()" style="color: rgb(47, 120, 188);" class="touchable">
+            <span class="material-icons">
+                logout
+                </span>
+        </div>
     </div>
     <div class="full-width row g-3 p-5">
         <div class="p-3 card bg-white">
             <div style="height: 200px;aspect-ratio: 1;border-radius: 50%;margin: 10px auto;" class="bg-gray mb-2"></div>
             <div class="font-md m-2 txt"><b>{{user.name}}</b></div>
             <div class="font-md m-2 txt text-blue-light-4">{{user.email}}</div>
-            <div class="font-md m-2 txt text-gray-light-4">{{user.phone}}</div>
+            <div class="font-md m-2 txt text-gray-light-4">+(212) {{user.phone}}</div>
             <div style="width: 80%;"><hr class="font-md m-2 text-gray"/></div>
-        <div class="font-md m-2"><b>Last Order</b></div>
-        <div class="font-md m-2"><b>Average Order Value</b></div>
-        <div class="font-md m-2"><b>Registered At</b></div>
-        <div class="text-gray txt font-md">{{user.createdAt |date}}</div>
-        <div class="font-md m-2"><b>Activated Email</b></div>
-        <div class="text-gray txt font-md">{{user.active?"Active":"Not Yet"}}</div>
+        <div class="font-md m-2"><b>Last Order :</b>{{user.lastOrder}}</div>
+        <div class="font-md m-2"><b>Average Order Value :</b>{{user.avgorders}} $</div>
+        <div class="font-md m-2"><b>Registered At :</b> {{user.createdAt |date}}</div>
+        <div class="font-md m-2"><b>Activated Email :</b>{{user.active?"Active":"Not Yet"}}</div>
         </div>
         <div class="flex">
             <div class="m-2 font-lg txt"><b>My Orders</b></div>
@@ -30,7 +33,6 @@
                     <td><div (click)="toOrder(row.id)" class="touchable myA font-md">#{{row.id}}</div></td>
                     <td><div class="font-md">{{row.total | currency}}</div></td>
                     <td><div class="font-md">{{row.items}}</div></td>
-                    <td><div class="font-md">Completed</div></td>
                     <td><div class="font-md">{{row.createdAt |date}}</div></td>
                   </tr>
                 </app-table>

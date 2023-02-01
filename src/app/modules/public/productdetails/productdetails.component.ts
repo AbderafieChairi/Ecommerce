@@ -13,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductdetailsComponent implements OnInit {
   public loading = true;
+
   public product :Product={} as Product;
   public images: String[]=[];
   public selectedImage=0;
@@ -27,13 +28,14 @@ export class ProductdetailsComponent implements OnInit {
     private favoriteService:FavoriteService,
     private cartService :CartService,
     private router:Router
-  ) { }
+  ) { 
+    this.catalogService.currentProduct.subscribe(p=>this.product=p);
+  }
 
   async ngOnInit() {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!);
-    // this.catalogService.getProductById(id).then(p=>{this.loading.next(false);this.product = p;this.outProduct=p;this.setImages()})
-    this.product = await this.catalogService.getById(id);
-    this.loading = false;
+    await this.catalogService.getById(id);
+    this.loading=false;
     this.favoriteService.products.subscribe(ps=>{this._inFavorite=this.inFavorite() })
     this.cartService.cart.subscribe(ps=>{
       if (ps != undefined){

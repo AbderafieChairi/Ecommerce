@@ -27,4 +27,7 @@ export class ProductsComponent implements OnInit {
   setTableData(T:any[]){
     this.tableData=T;
   }
+  deleteProd(id:number){
+    this.productService.deleteProduct(id);
+  }
 }

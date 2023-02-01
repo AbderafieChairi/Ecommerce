@@ -44,30 +44,28 @@
                     </div>
                 </td>
                 <td class="details">
-                    <div class="cost">{{item.product.price}}£</div>
+                    <div class="cost">
+                        <div class="font-lg">{{item.product.price}}£</div>
+                        <div class="font-sm" *ngIf="item.hasReduce">(has promo reduction -10%)</div>
+                    </div>
                 </td>
             </tr>
-
+            <tr>
+                <td colspan="5">
+                    <div class="full-width p-2 column al-right">
+                        <div class="font-md">
+                            <b>Total {{price}}£</b>
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </table>
-        <div class="row full-width jst-center">
-            <div class="bg-white br-black font-md p-2 col-2-xl col-6-md col-12-sm gap-2 m-3">
-                Discount 0.00£
-            </div>
-            <div class="bg-white br-black font-md p-2 col-2-xl col-6-md col-12-sm gap-2 m-3">
-                Delivery 0.00£
-            </div>            
-            <div class="bg-white br-black font-md p-2 col-2-xl col-6-md col-12-sm gap-2 m-3">
-                Subtotal {{price}}£
-            </div>
-            <div class="bg-white br-black font-md p-2 col-2-xl col-6-md col-12-sm gap-2 m-3">
-                Total {{price}}£
-            </div>
-        </div>
+
         
         <div class="commande">
             <div class="discount">
-                <input placeholder="please enter a promo"/>
-                <div class="discount-btn button">
+                <input placeholder="please enter a promo" [(ngModel)]="promocode"/>
+                <div class="discount-btn button" (click)="checkPromoCode()">
                     Apply Discount
                 </div>
             </div>

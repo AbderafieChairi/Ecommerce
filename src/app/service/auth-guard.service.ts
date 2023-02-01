@@ -13,8 +13,8 @@ export class AuthGuardService implements CanActivate {
     private router:Router
   ) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    // if(this.auth.getCurrentUser)
-    console.log(route)
-    return true;
+    if(this.auth.getCurrentUser().id!=null) return true
+    this.router.navigate(["store","home"]);
+    return false;
   }
 }

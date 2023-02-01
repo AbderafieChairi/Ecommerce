@@ -2,5 +2,8 @@
   <tr *ngFor="let row of tableData" class="font-md p-5 full-width">
     <td><input type="checkbox" [(ngModel)]="row.sel" /></td>
     <td *ngFor="let head of displayedColumns">{{ row[head.col] }}</td>
+    <!-- <td style="width: max-content; border-bottom: 0px;"><div class="btn-primary txt" style="width: max-content;"
+      (click)="deletecat(row.id)"
+      >Delete</div></td> -->
   </tr>
 </app-table>

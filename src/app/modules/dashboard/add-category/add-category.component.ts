@@ -23,8 +23,9 @@ export class AddCategoryComponent implements OnInit {
     });
   }
   save(){
-    console.log(this.addCategoryForm.value);
+    
     this.cs.addCategory(this.addCategoryForm.value);
+    this.addCategoryForm.reset();
     this.snackBar.open('Success!', 'Dismiss', {
       duration: 3000,
       panelClass: ['success-snackbar']

@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div *ngIf="loading==false">
     <div class="m-3">
         <div class="row  display-f al-center" style="position: relative;">
             <div class="img">
@@ -46,7 +46,11 @@
             <img [src]="src"  *ngFor="let src of images" height="200" width="200">
         </div>
     </div>
-    
+    <div class="row g-2">
+        <div *ngFor="let item of product.images">
+            <img [src]="item.url" height="100" width="100" class="touchable">
+        </div>
+    </div>
     
     <div class="m-3" >
         <div class="font-lg text-primary m-3">Details</div>

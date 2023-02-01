@@ -1,66 +1,27 @@
 
 
 <mat-drawer-container class="main-content">
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <mat-list>
-      <div mat-subheader>Hello Guest</div>
-      <mat-list-item >
-        <span class="material-icons-round icon" matListItemIcon>space_dashboard</span>
-        <div matListItemTitle>Dashboard</div>
-      </mat-list-item>
-      <mat-list-item >
-        <span class="material-icons-outlined icon" matListItemIcon>grid_view</span>
-        <div matListItemTitle>Products</div>
-      </mat-list-item>
-      <mat-list-item >
-        <span class="material-icons-outlined icon" matListItemIcon>table_view</span>
-        <div matListItemTitle>Orders</div>
-      </mat-list-item>
-    </mat-list>
-  </mat-drawer>
   <mat-toolbar color="rimary" class="nav">
-    <div (click)="drawer.toggle()" class="touchable" style="margin-right: 10px;position: relative;top: 3px;">
-      <mat-icon >menu</mat-icon>
-    </div>
     <div (click)="toHome()" class="logo">
-      <span>E-Shop</span>
+      <span class="font-lg"><b>E-Shop</b></span>
     </div>
     
     <span class="example-spacer">
       <app-search></app-search>
     </span>
-    <div class="icon">
-      <a routerLink="/store/profile" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;">
+    <div class="icon touchable" (click)="toProfile()">
         <mat-icon  matBadgeColor="warn" style="font-size: 30px;color: rgb(0, 0, 0);">account_circle</mat-icon>    
-      </a>      
     </div>
-    <div class="icon">
+    <div class="icon touchable">
       <a routerLink="/store/favorite" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;">
         <mat-icon matBadge="{{nbrFav}}" matBadgeColor="warn" style="font-size: 30px;color: rgb(0, 0, 0);">favorite_border</mat-icon>    
       </a>      
     </div>
-    <div class="icon">
+    <div class="icon touchable">
       <a routerLink="/store/cart" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none;">
         <mat-icon matBadge="{{nbr}}" matBadgeColor="warn" style="font-size: 30px;color: rgb(0, 0, 0);">shopping_cart</mat-icon>    
       </a>
     </div>
-    <!-- <div mat-icon-button [matMenuTriggerFor]="menu" class="touchable">
-        <mat-icon>more_vert</mat-icon>
-    </div>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
-      </mat-menu> -->
   </mat-toolbar>
   <div class="example-sidenav-content">
     <router-outlet></router-outlet>

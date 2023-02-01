@@ -9,6 +9,7 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OrderComponent } from './order/order.component';
+import { AuthGuardService } from 'src/app/service/auth-guard.service';
 
 const routes: Routes = [
     {path:'',component:IndexComponent,children:[
@@ -18,7 +19,7 @@ const routes: Routes = [
         {path:'favorite',component:FavoritesComponent},
         {path:'checkout',component:CheckoutComponent},
         {path:'order',component:OrderComponent},
-        {path:'profile',component:ProfileComponent},
+        {path:'profile',component:ProfileComponent,canActivate:[AuthGuardService]},
         {path:'product/:id',component:ProductdetailsComponent},
         
     ]}

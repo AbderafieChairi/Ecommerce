@@ -29,5 +29,7 @@ export class CategoryComponent implements OnInit  {
   setTableData(T:any[]){
     this.tableData=T;
   }
- 
+  deletecat(id:number){
+    this.categoryService.deletecategory(id);
+  }
 }

@@ -7,6 +7,7 @@ import { ProductsComponent } from './products/products.component';
 import { CategoryComponent } from './category/category.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
     {path:'',component:HomeComponent,children:[
@@ -15,7 +16,9 @@ const routes: Routes = [
         {path:'orders',component:OrdersComponent},
         {path:'dashboard',component:DashboardComponent},
         {path:'categorylist',component:CategoryComponent},
-        {path:'addcategory',component:AddCategoryComponent}
+        {path:'addcategory',component:AddCategoryComponent},
+        {path:'order',component:OrderComponent},
+
     ]},
   ]
   

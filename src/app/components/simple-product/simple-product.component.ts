@@ -17,13 +17,10 @@ export class SimpleProductComponent implements OnInit {
   // productDiscount = this.product?Math.round(this.product.reduced_cost/this.product.cost):null;
   Math = Math;
   constructor(
-      private favoriteService:FavoriteService,
       private router:Router
     ) { }
   ngOnInit(): void {
-    this.favoriteService.products.subscribe(ps=>{
-      this._inFavorite=this.inFavorite()
-    })
+
   }
 
   goToDetails(){
@@ -31,15 +28,5 @@ export class SimpleProductComponent implements OnInit {
       ['/store/product/', this.product.id]) 
   }
   
-  
 
-  AddToFavorite(){
-    this.favoriteService.addToFavorite(this.product);
-  }
-  removeFromFavorite(){
-    this.favoriteService.removeFromFavorite(this.product.id);
-  }
-  inFavorite():boolean{
-    return this.favoriteService.inFavorite(this.product.id);
-  }
 }

@@ -19,9 +19,6 @@
                 <div class="mb-2 mt-2">
                   <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="priceOptions"></ngx-slider>
                 </div>
-                <div class="display-f jst-end">
-                    <div class="btn-primary p-2 font-md">Filter</div>
-                </div>
             </div>
             <div class="br-gray p-3 m-5 card bg-white" style="min-width: 400px;">
                 <div class="font-lg m-2">Discount</div>
@@ -31,9 +28,7 @@
                   </div>
                     <div class="font-md">{{discount}}</div>
                 </div>
-                <div class="display-f jst-end">
-                    <div class="btn-primary p-2 font-md">Filter</div>
-                </div>
+
             </div>
         </div>
 
@@ -45,7 +40,7 @@
                 </div>    
             </div> -->
             <div class="flex ">
-                <div class="product_catgery card bg-white">
+                <div class="p-2" style="border-radius: 10px">
                   <div  class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
                     <div class="font-lg text-primary">{{category}}</div>
                     <div class="Fiter_by">
@@ -60,7 +55,7 @@
                     </div>
                   </div>
                   <div class="row al-center jst-s_b p-1" style="border-bottom: solid 1px black;">
-                    <div class="font-md">{{filteredProduct.length | number}} results</div>
+                    <div class="font-md">{{products.length | number}} results</div>
                     <div class="row">
                       <div class="touchable" (click)="setGridView(false)">
                         <span class="material-icons apperence font-xl" [ngStyle]="{color:GridView?'#333':'orange'}">view_list</span>
@@ -71,11 +66,11 @@
                     </div>
                   </div>
                   <div class="products"  [ngStyle]="{flexDirection:GridView?'row':'none',alignItems:'center',display:GridView?'flex':'block'}">
-                      <app-simple-product [product]="item" [defaultView]='GridView' *ngFor="let item of filteredProduct"></app-simple-product>
+                      <app-simple-product [product]="item" [defaultView]='GridView' *ngFor="let item of products | discount :discount | price :minPrice:maxPrice"></app-simple-product>
                   </div>
                   <div class="full-width">
-                    <mat-paginator [length]="filteredProduct.length" [pageSizeOptions]="[3, 6, 9]" aria-label="Select page" class="font-md">
-                    </mat-paginator>
+                    <!-- <mat-paginator [length]="products.length" [pageSizeOptions]="[3, 6, 9]" aria-label="Select page" class="font-md">
+                    </mat-paginator> -->
                     </div>
                 </div>
               </div>

@@ -7,8 +7,8 @@ import { AuthGuardService } from 'src/app/service/auth-guard.service';
 
 const routes: Routes = [
     {path:'',component:IndexComponent,children:[
-        {path:'login',component:LoginComponent,canActivate:[AuthGuardService]},
-        {path:'signup',component:SignupComponent,canActivate:[AuthGuardService]},
+        {path:'login',component:LoginComponent},
+        {path:'signup',component:SignupComponent},
         
     ]}
     
@@ -18,6 +18,5 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers:[AuthGuardService]
 })
 export class UserRoutingModule { }

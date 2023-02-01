@@ -25,6 +25,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { UploadComponent } from 'src/app/components/upload/upload.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { TableModule } from 'src/app/components/table/table.module';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TableModule } from 'src/app/components/table/table.module';
     MultipleChoiceComponent,
     AdvChoiceComponent,
     UploadComponent,
+    OrderComponent,
     
 
     

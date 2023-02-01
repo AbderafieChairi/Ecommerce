@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
   signIn() {
       this.authService.normalSignIn(this.loginForm.value.email,this.loginForm.value.password)
-      .then(()=>{this.router.navigate(['user',"signup"])})
   }
   signInWithGoogle(){
     this.authService.googleSignIn()

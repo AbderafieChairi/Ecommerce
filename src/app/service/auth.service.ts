@@ -3,31 +3,52 @@ import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '
 import {signInWithPopup,GoogleAuthProvider} from '@angular/fire/auth'
 import { FirestoreModule } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth : Auth,private db:FirestoreModule,private router:Router) { }
+  constructor(private auth : Auth,private db:FirestoreModule,private router:Router) { 
+    this.auth.onAuthStateChanged(u=>{
+      if(!u){
+        localStorage.removeItem("user");
+      }
+    })
+
+  }
 
   getCurrentUser(){
-    return this.auth.currentUser;
+    return this.userStorage;
+  }
+
+
+  get userStorage():User{
+    const user_st = localStorage.getItem("user");
+    return user_st!=null ? JSON.parse(user_st) as User:{} as User;
+  }
+  set userStorage(user:User){
+    localStorage.setItem("user",JSON.stringify(user));
   }
 
   async normalSignIn(email:string,password:string){
     return signInWithEmailAndPassword(this.auth,email,password)
     .then((user)=>{
+      console.log('http://localhost:8080/user/'+user.user.uid)
       fetch('http://localhost:8080/user/'+user.user.uid)
       .then(res=>res.json())
-      .then(json=>{
-        localStorage.setItem("user",json);
-        this.router.navigate(['store','profile'])
+      .then((json:User)=>{
+        console.log("get user from local server")
+        this.userStorage=json
+        if(json?.rule=="admin") this.router.navigate(['admin','dashboard'])
+        else this.router.navigate(['store','profile'])
       })
     })
     .catch(e=>{
       if (e.code=="auth/user-not-found"){
-        console.log("create new user")
-        createUserWithEmailAndPassword(this.auth,email,password)
+        console.log("user not found")
+        createUserWithEmailAndPassword(this.auth,email,password);
+        this.router.navigate(['user',"signup"])
       }
     })
   }
@@ -35,7 +56,7 @@ export class AuthService {
     const u =user;
     u.email = this.auth.currentUser?.email;
     u.id = this.auth.currentUser?.uid;
-    console.log(u)
+    console.log("create new user")
     return fetch('http://localhost:8080/user',{
       method:'POST',
       body:JSON.stringify(u),
@@ -45,27 +66,23 @@ export class AuthService {
     })
     .then(res=>res.json())
     .then(json=>{
-      localStorage.setItem("user",JSON.stringify(json))
-      console.log("user created")
+      this.userStorage=json;
       this.router.navigate(['store','profile'])
     })
     .catch(err=>console.log("an error occured when user creation"))
   }
-  // createUser(id:String){
-  //   addDoc(collection(db))
-  // }
   googleSignIn(){
     const provider = new GoogleAuthProvider();
     return signInWithPopup(this.auth,provider)
     .then((user)=>{
-      console.log(user.user.uid)
-      console.log('http://localhost:8080/user/'+user.user.uid.toString())
+      console.log("get user from server side")
+
       fetch('http://localhost:8080/user/'+user.user.uid.toString())
       .then(res=>res.json())
       .then(json=>{
-        console.log(json)
-        localStorage.setItem("user",JSON.stringify(json));
-        this.router.navigate(['store','profile'])
+        this.userStorage=json;
+        if(json?.rule=="admin") this.router.navigate(['admin','dashboard'])
+        else this.router.navigate(['store','profile'])
       })
       .catch(err=>{
         console.log(err)
@@ -74,7 +91,11 @@ export class AuthService {
     })
 
   }
-  signUp(datail :any[]){
-
+  logout(){
+    this.auth.signOut()
+    .then(()=>{
+      localStorage.removeItem("user");
+      this.router.navigate(['store','home'])
+    })
   }
 }

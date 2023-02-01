@@ -22,10 +22,7 @@ export class CheckoutComponent implements OnInit {
       const b:boolean=params['seccus'] =="true"
       console.log(b);
       this.seccus.next(b)
-      // if(!this.orderService.testToken(params['token'] as string)){
-      //   console.log("token invalid")
-      //   this.router.navigate(["store","home"])
-      // }else{
+
       if(b){
         console.log("submit order to server ")
         this.orderService.SubmitOrder()
@@ -35,29 +32,15 @@ export class CheckoutComponent implements OnInit {
   }
   constructor(
     private orderService:OrderService,
-    private fb : FormBuilder,
     private router : Router,
     private route :ActivatedRoute
     ){
-    // this.checkoutForm = this.fb.group({
-    //   fullName: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   address: ['', Validators.required],
-    //   city: ['', Validators.required],
-    //   country: ['', Validators.required],
-    //   zip: ['', [Validators.required, Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')]],
-    //   phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]]
-    // });
+
   }
-  onSubmit(){
-    // console.log(this.checkoutForm.value)
+  toHome(){
+    this.router.navigate(["store","home"])
     
   }
 
-  quit(){
-    // this.orderService.quitCheckOut();
-    // localStorage.removeItem("order_id");
-    // this.router.navigate(['store','cart']);
-  }
 
 }

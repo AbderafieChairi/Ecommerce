@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from '../services/catalog.service';
 import { FormControl } from '@angular/forms';
-import {BehaviorSubject} from 'rxjs';
 import { Product } from 'src/app/models/Product';
 import { CategoryService } from '../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';

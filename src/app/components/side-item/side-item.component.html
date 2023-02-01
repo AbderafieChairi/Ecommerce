@@ -3,12 +3,12 @@
     item.icon
   }}</span>
   <div matListItemTitle (click)="item.action()">{{ item.title }}</div>
-  <div>
+  <div *ngIf="item.subItems.length>0">
     <span class="material-icons" *ngIf="getExpand()">expand_less</span>
     <span class="material-icons" *ngIf="!getExpand()">expand_more</span>
   </div>
 </mat-list-item>
-<mat-list *ngIf="getExpand()">
+<mat-list *ngIf="getExpand() && item.subItems.length>0">
   <mat-list-item *ngFor="let item of item.subItems" class="touchable text-hover-gray">
       <div matListItemTitle (click)="item.action()">{{ item.title }}</div>
   </mat-list-item>

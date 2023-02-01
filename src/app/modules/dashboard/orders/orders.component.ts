@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { OrderDetail } from 'src/app/models/Order';
-import { OrderService } from '../../public/services/order.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderDataAdmin, OrderDataAdminTitle, OrderDetail } from 'src/app/models/Order';
+import { OrderService } from '../services/order.service';
+import { Col } from 'src/app/components/table/table.component';
 
 @Component({
   selector: 'app-orders',
@@ -10,17 +11,35 @@ import { OrderService } from '../../public/services/order.service';
 })
 export class OrdersComponent implements OnInit {
 
-  orders !:OrderDetail[];
+  orders !:OrderDataAdmin[];
+  displayedColumns: Col[]=[]
   constructor(
     private orderService:OrderService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
       this.orders=[]
-        this.orderService.getOrders()
-        .then(res=>this.orders.push(res))
-      
+        this.orderService.getorders()
+        .then(res=>{
+          this.displayedColumns=res?Object.keys(OrderDataAdminTitle).map(i=>{return {col:i,asc:"ASC",sel:false,name:OrderDataAdminTitle[i]}}):[];
+          this.orders=res;
+        })
   }
+  tableData:any[]=[];
+  setTableData(T:any[]){
+    this.tableData=T;
+  }
+ 
 
+  toOrder(id:number){
+    this.router.navigate(["admin","order"],{
+      queryParams:{id}
+    })
+  }
+  deleteOrder(id:number){
+    this.orderService.deleteOrder(id)
+    .then(()=>window.location.reload())
+  }
 }

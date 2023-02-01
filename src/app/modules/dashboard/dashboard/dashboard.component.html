@@ -8,32 +8,16 @@
         <div class="card bg-white p-3">
           <div class="row pr-1 jst-s_b al-center mb-4">
             <h2 class="">Total sells</h2>
-            <div mat-icon-button [matMenuTriggerFor]="menu" class="touchable">
-              <mat-icon>more_vert</mat-icon>
-              </div>
-              <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                  <mat-icon>dialpad</mat-icon>
-                  <span>Redial</span>
-                  </button>
-                  <button mat-menu-item disabled>
-                  <mat-icon>voicemail</mat-icon>
-                  <span>Check voice mail</span>
-                  </button>
-                  <button mat-menu-item>
-                  <mat-icon>notifications_off</mat-icon>
-                  <span>Disable alerts</span>
-                  </button>
-              </mat-menu>
+            
           </div>
           <div style="flex-wrap: wrap;" class="row jst-s_b al-center">
-            <div class="font-xl text-primary p-2">{{this.ActualtotalSells}}</div>
+            <div class="font-xl text-primary p-2">{{this.ActualtotalSells | currency}}</div>
             <div class="column g-1 al-right">
               <div class={{style1}}>
                   <div class="saw-indicator__delta-direction">
                       <span class="material-icons">{{var1trending}}</span>
                   </div>
-                  <div class="saw-indicator__delta-value">{{this.vartotalSells}}</div>
+                  <div class="saw-indicator__delta-value">{{this.vartotalSells | percent:"2.1-2"}}</div>
               </div>
               <div class="font-md text-gray">Compared to previous month</div>
             </div>
@@ -44,32 +28,16 @@
         <div class="card bg-white p-3">
           <div class="row pr-1 jst-s_b al-center mb-4">
             <h2 class="">Avg sell price</h2>
-            <div mat-icon-button [matMenuTriggerFor]="menu" class="touchable">
-              <mat-icon>more_vert</mat-icon>
-              </div>
-              <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                  <mat-icon>dialpad</mat-icon>
-                  <span>Redial</span>
-                  </button>
-                  <button mat-menu-item disabled>
-                  <mat-icon>voicemail</mat-icon>
-                  <span>Check voice mail</span>
-                  </button>
-                  <button mat-menu-item>
-                  <mat-icon>notifications_off</mat-icon>
-                  <span>Disable alerts</span>
-                  </button>
-              </mat-menu>
+            
           </div>
           <div style="flex-wrap: wrap;" class="row jst-s_b al-center">
-            <div class="font-xl text-primary p-2">{{this.ActualsellsAvgPrice}}</div>
+            <div class="font-xl text-primary p-2">{{this.ActualsellsAvgPrice| currency}}</div>
             <div class="column g-1 al-right">
               <div class={{style2}}>
                   <div class="saw-indicator__delta-direction">
                       <span class="material-icons">{{var2trending}}</span>
                   </div>
-                  <div class="saw-indicator__delta-value">{{this.varsellsAvgPrice}}</div>
+                  <div class="saw-indicator__delta-value">{{this.varsellsAvgPrice| percent:"2.1-2"}}</div>
               </div>
               <div class="font-md text-gray">Compared to previous month</div>
             </div>
@@ -80,23 +48,7 @@
         <div class="card bg-white p-3">
           <div class="row pr-1 jst-s_b al-center mb-4">
             <h2 class="">number of sells</h2>
-            <div mat-icon-button [matMenuTriggerFor]="menu" class="touchable">
-              <mat-icon>more_vert</mat-icon>
-              </div>
-              <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                  <mat-icon>dialpad</mat-icon>
-                  <span>Redial</span>
-                  </button>
-                  <button mat-menu-item disabled>
-                  <mat-icon>voicemail</mat-icon>
-                  <span>Check voice mail</span>
-                  </button>
-                  <button mat-menu-item>
-                  <mat-icon>notifications_off</mat-icon>
-                  <span>Disable alerts</span>
-                  </button>
-              </mat-menu>
+            
           </div>
           <div style="flex-wrap: wrap;" class="row jst-s_b al-center">
             <div class="font-xl text-primary p-2">{{this.ActualnumberOfSells}}</div>
@@ -105,7 +57,7 @@
                   <div class="saw-indicator__delta-direction">
                       <span class="material-icons">{{var3trending}}</span>
                   </div>
-                  <div class="saw-indicator__delta-value">{{this.varnumberOfSells}}</div>
+                  <div class="saw-indicator__delta-value">{{this.varnumberOfSells| percent:"2.1-2"}}</div>
               </div>
               <div class="font-md text-gray">Compared to previous month</div>
             </div>

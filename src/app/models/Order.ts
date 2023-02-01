@@ -3,24 +3,18 @@ import { User } from "./User";
 
 export interface Order{
     id:number;
-    subtotal:number;
     total:number;
     orderItems:OrderItem[];
     user : User;
-    deliveryType:String;
-    deliveryPrice:number;
+    createdAt:Date ;
 }
 export interface OrderDetail{
     id:number;
-    subtotal:number;
     total:number;
     orderItems:OrderItem[];
-    user : User;
-    state:string;
-    deliveryType:String;
-    deliveryPrice:number;
     createdAt:Date ;
     items:number;
+    user : User;
 }
 
 
@@ -28,7 +22,13 @@ export interface OrderData{
     id:number;
     total:number;
     items:number;
-    state:string;
+    createdAt:Date;
+}
+export interface OrderDataAdmin{
+    id:number;
+    total:number;
+    items:number;
+    username:String;
     createdAt:Date;
 }
 
@@ -37,6 +37,13 @@ export const OrderDataTitle:any={
     id: "Id",
     total:"Total",
     items:"items",
-    state:"state",
+    createdAt:"date" 
+}
+
+export const OrderDataAdminTitle:any={
+    id: "Id",
+    total:"Total",
+    items:"items",
+    username:"username",
     createdAt:"date" 
 }

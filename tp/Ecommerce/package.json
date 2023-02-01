@@ -1,0 +1,18 @@
+{
+  "name": "Ecommece",
+  "version": "1.0.0",
+  "description": "A sample Stripe implementation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node-dev server.js"
+  },
+  "author": "Ecommeces",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-dev": "^8.0.0",
+    "stripe": "^9.0.0"
+  }
+}

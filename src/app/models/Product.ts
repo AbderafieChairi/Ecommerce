@@ -1,5 +1,6 @@
 import { category } from "./Category";
 import { Tag } from "./Tag";
+import { promoCode } from "./promoCode";
 
 export interface Product {
     id: number;
@@ -13,16 +14,15 @@ export interface Product {
     details:String;
     shortdetails:String;
     createdAt:Date;
-    productItemsList:ProdcutItem[];
+    quantity:number;
     discount:discount;
     modifiedAt:Date;
     visiblity:String;
     scheduledDate:Date;
     state:String;
+    promoCodes:promoCode[];
 }
-interface ProdcutItem{
-    isbn:number;
-}
+
 export interface discount{
     id:number;
     value:number;
@@ -51,8 +51,7 @@ export const ProductDataTitle:any={
     price:'Price'
 }
 export enum ProductState{
-    onSale='on sale',
-    new='New',
+    Available='Available',
     outOfStock='Out of stock',
 }
 

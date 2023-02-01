@@ -48,4 +48,10 @@ export class ProductService {
     this.post('products',product)
     .then(res=>console.log(res))
   }
+  deleteProduct(id:number){
+    console.log("http://localhost:8080/products/delete/"+ id)
+    fetch("http://localhost:8080/products/delete/"+ id)
+    // .then(res=>window.location.reload())
+
+  }
 }
